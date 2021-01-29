@@ -2,28 +2,61 @@ import 'package:flutter/material.dart';
 
 void main() => runApp(MyApp());
 
-class MyApp extends StatelessWidget{
-    @override
-    Widget build(BuildContext context){
-        return MaterialApp(
-                title: 'MaterialApp',
-                home: HomePage(),
-        );
-    }
+class MyApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'MaterialApp',
+      home: HomePage(),
+    );
+  }
 }
 
 class HomePage extends StatefulWidget {
-    const HomePage({
-        Key key,
-    }) :super (key: key);
+  const HomePage({
+    Key key,
+  }) : super(key: key);
 
-    @override
-    Widget build(BuildContext context){
-        return Scaffold(
-                appBar: AppBar(
-                        title: Text("Info ITESO"),
-                ),
-body: SingleChildScrollView(
+  @override
+  _HomePageState createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool liked = false;
+  bool disliked = false;
+  int _likeCounter = 0;
+  int _dislikeCounter = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text("Info ITESO"), actions: <Widget>[
+        IconButton(
+          icon: const Icon(Icons.keyboard_control),
+          onPressed: () {
+            String formattedDateTime = DateTime.now().toString();
+            if (_likeCounter % 2 == 0) {
+              showDialog(
+                context: context,
+                barrierDismissible: false,
+                builder: (_) => new AlertDialog(
+                    title: new Text('Fecha'),
+                    content: new Text(formattedDateTime),
+                    actions: <Widget>[
+                      TextButton(
+                        child: Text('OK'),
+                        onPressed: () {
+                          Navigator.of(context).pop();
+                        },
+                      )
+                    ]),
+              );
+            }
+            print('entre a mostrar el dialogo');
+            //}
+          },
+        )
+      ]),
+      body: SingleChildScrollView(
         child: Column(
           children: [
             //Image.asset("assets/iteso.jpg"),
@@ -52,12 +85,36 @@ body: SingleChildScrollView(
                     ),
                   ),
                   IconButton(
-                    icon: Icon(Icons.thumb_up),
-                    onPressed: () {
-                      //TODO: hacer lo necesario para incrementar y cambiar colores
-                    },
+                      icon: Icon(Icons.thumb_up),
+                      color: liked ? Colors.blue : Colors.black45,
+                      onPressed: () {
+                        setState(
+                          () {
+                            liked = !liked;
+                            if (liked) {
+                              _likeCounter++;
+                            }
+                          },
+                        );
+                      }),
+                  Text("$_likeCounter"),
+                  SizedBox(
+                    width: 8,
                   ),
-                  Text("999"),
+                  IconButton(
+                      icon: Icon(Icons.thumb_down),
+                      color: disliked ? Colors.red : Colors.black45,
+                      onPressed: () {
+                        setState(
+                          () {
+                            disliked = !disliked;
+                            if (disliked) {
+                              _dislikeCounter++;
+                            }
+                          },
+                        );
+                      }),
+                  Text("$_dislikeCounter"),
                   SizedBox(
                     width: 8,
                   )
