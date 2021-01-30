@@ -68,7 +68,9 @@ class _HomePageState extends State<HomePage> {
                             liked = !liked;
                             if (liked) {
                               _likeCounter++;
-                              _dislikeCounter--;
+                              if (_dislikeCounter > 0) {
+                                _dislikeCounter--;
+                              }
                             }
                           },
                         );
@@ -86,7 +88,9 @@ class _HomePageState extends State<HomePage> {
                             disliked = !disliked;
                             if (disliked) {
                               _dislikeCounter++;
-                              _likeCounter--;
+                              if (_likeCounter > 0) {
+                                _likeCounter--;
+                              }
                             }
                           },
                         );
@@ -98,7 +102,9 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
+            //this widget contains mail, call and direction buttons sections and his format.
             OptionBar(),
+            //
             Padding(
               padding: EdgeInsets.all(24.0),
               child: Text(
