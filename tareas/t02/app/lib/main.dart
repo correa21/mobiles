@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 void main() => runApp(MyApp());
 
@@ -29,37 +30,10 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Info ITESO"), actions: <Widget>[
-        IconButton(
-          icon: const Icon(Icons.keyboard_control),
-          onPressed: () {
-            String formattedDateTime = DateTime.now().toString();
-            if (_likeCounter % 2 == 0) {
-              showDialog(
-                context: context,
-                barrierDismissible: false,
-                builder: (_) => new AlertDialog(
-                    title: new Text('Fecha'),
-                    content: new Text(formattedDateTime),
-                    actions: <Widget>[
-                      TextButton(
-                        child: Text('OK'),
-                        onPressed: () {
-                          Navigator.of(context).pop();
-                        },
-                      )
-                    ]),
-              );
-            }
-            print('entre a mostrar el dialogo');
-            //}
-          },
-        )
-      ]),
+      appBar: buildAppBar(context),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            //Image.asset("assets/iteso.jpg"),
             Image.network("https://pbs.twimg.com/media/DburBCaVQAAM_2g.jpg"),
             Padding(
               padding: EdgeInsets.symmetric(
@@ -110,6 +84,7 @@ class _HomePageState extends State<HomePage> {
                             disliked = !disliked;
                             if (disliked) {
                               _dislikeCounter++;
+                              _likeCounter--;
                             }
                           },
                         );
@@ -171,6 +146,62 @@ class _HomePageState extends State<HomePage> {
           ],
         ),
       ),
+    );
+  }
+
+  AppBar buildAppBar(BuildContext context) {
+    return AppBar(title: Text("Info ITESO"), actions: <Widget>[
+      IconButton(
+        icon: const Icon(Icons.keyboard_control),
+        onPressed: () {
+          String formattedDateTime = DateFormat('yyyy-MM-dd \n kk:mm:ss')
+              .format(DateTime.now())
+              .toString();
+          if (_likeCounter % 2 == 0) {
+            buildPairDialog(context);
+          } else {
+            buildDateDialog(context, formattedDateTime);
+          }
+          print('entre a mostrar el dialogo');
+          //}
+        },
+      )
+    ]);
+  }
+
+  Future buildPairDialog(BuildContext context) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => new AlertDialog(
+          title: new Text('Par'),
+          content: new Text('El contador de likes es par'),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ]),
+    );
+  }
+
+  Future buildDateDialog(BuildContext context, String formattedDateTime) {
+    return showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (_) => new AlertDialog(
+          title: new Text('Fecha y Hora'),
+          content: new Text(formattedDateTime),
+          actions: <Widget>[
+            TextButton(
+              child: Text('OK'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            )
+          ]),
     );
   }
 }
