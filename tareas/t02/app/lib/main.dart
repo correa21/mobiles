@@ -185,7 +185,7 @@ class OptionBar extends StatelessWidget {
                 child: IconButton(
                   icon: Icon(Icons.mail, size: 40),
                   onPressed: () {
-                    Scaffold.of(context).hideCurrentSnackBar();
+                    Scaffold.of(context).removeCurrentSnackBar();
                     Scaffold.of(context).showSnackBar(SnackBar(
                       content: Text('Enviar un correo'),
                     ));
@@ -204,7 +204,7 @@ class OptionBar extends StatelessWidget {
                 child: IconButton(
                   icon: Icon(Icons.add_call, size: 40),
                   onPressed: () {
-                    Scaffold.of(context).hideCurrentSnackBar();
+                    Scaffold.of(context).removeCurrentSnackBar();
                     Scaffold.of(context).showSnackBar(SnackBar(
                       content: Text('Hacer llamada'),
                     ));
@@ -223,7 +223,7 @@ class OptionBar extends StatelessWidget {
                 child: IconButton(
                   icon: Icon(Icons.directions, size: 40),
                   onPressed: () {
-                    Scaffold.of(context).hideCurrentSnackBar();
+                    Scaffold.of(context).removeCurrentSnackBar();
                     Scaffold.of(context).showSnackBar(SnackBar(
                       content: Text('Ir al ITESO'),
                     ));
