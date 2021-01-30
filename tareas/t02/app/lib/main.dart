@@ -13,6 +13,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
+//STATEFUL HOMEPAGE
 class HomePage extends StatefulWidget {
   const HomePage({
     Key key,
@@ -67,6 +68,7 @@ class _HomePageState extends State<HomePage> {
                             liked = !liked;
                             if (liked) {
                               _likeCounter++;
+                              _dislikeCounter--;
                             }
                           },
                         );
@@ -96,48 +98,7 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                //botones
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.mail,
-                        size: 64,
-                      ),
-                      Text("Correo"),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.call,
-                        size: 64,
-                      ),
-                      Text("Llamar"),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: EdgeInsets.all(8.0),
-                  child: Column(
-                    children: [
-                      Icon(
-                        Icons.directions,
-                        size: 64,
-                      ),
-                      Text("Ruta"),
-                    ],
-                  ),
-                ),
-              ],
-            ),
+            OptionBar(),
             Padding(
               padding: EdgeInsets.all(24.0),
               child: Text(
@@ -162,7 +123,6 @@ class _HomePageState extends State<HomePage> {
           } else {
             buildDateDialog(context, formattedDateTime);
           }
-          print('entre a mostrar el dialogo');
           //}
         },
       )
@@ -202,6 +162,79 @@ class _HomePageState extends State<HomePage> {
               },
             )
           ]),
+    );
+  }
+}
+
+class OptionBar extends StatelessWidget {
+  const OptionBar({
+    Key key,
+  }) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        //botones
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              SizedBox(
+                child: IconButton(
+                  icon: Icon(Icons.mail, size: 40),
+                  onPressed: () {
+                    Scaffold.of(context).hideCurrentSnackBar();
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text('Enviar un correo'),
+                    ));
+                  },
+                ),
+              ),
+              Text("Correo"),
+            ],
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              SizedBox(
+                child: IconButton(
+                  icon: Icon(Icons.add_call, size: 40),
+                  onPressed: () {
+                    Scaffold.of(context).hideCurrentSnackBar();
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text('Hacer llamada'),
+                    ));
+                  },
+                ),
+              ),
+              Text("Llamada"),
+            ],
+          ),
+        ),
+        Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Column(
+            children: [
+              SizedBox(
+                child: IconButton(
+                  icon: Icon(Icons.directions, size: 40),
+                  onPressed: () {
+                    Scaffold.of(context).hideCurrentSnackBar();
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text('Ir al ITESO'),
+                    ));
+                  },
+                ),
+              ),
+              Text('Ruta'),
+            ],
+          ),
+        ),
+      ],
     );
   }
 }
