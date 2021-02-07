@@ -58,9 +58,10 @@ class _HomeState extends State<Home> {
     // TODO: completar en navigator pasando los parametros a la pagina de HotDrinksPage
 
     Navigator.of(context).push(
-      MaterialPageRoute(
-          builder: (context) => HotDrinksPage(
-              drinksList: ProductRepository.loadProducts(ProductType.BEBIDAS))),
+      MaterialPageRoute(builder: (context) {
+        return HotDrinksPage(
+            drinksList: ProductRepository.loadProducts(ProductType.BEBIDAS));
+      }),
     );
   }
 

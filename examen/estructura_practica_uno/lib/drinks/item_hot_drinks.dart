@@ -42,32 +42,73 @@ class _ItemHotDrinksState extends State<ItemHotDrinks> {
             ),
             child: Row(
               children: [
-                Container(
-                  margin: EdgeInsets.only(left: 16),
-                  width: 160,
-                  decoration: BoxDecoration(
-                    color: Colors.yellow[300],
-                    borderRadius: BorderRadius.all(
-                      Radius.circular(30),
+                Column(
+                  children: [
+                    Container(
+                      width: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text(
+                          'Café',
+                          style: Theme.of(context)
+                              .textTheme
+                              .subtitle1
+                              .copyWith(fontSize: 20),
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
                     ),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(24.0),
-                    child: Text(
-                      "${widget.drink.productTitle}",
-                      style: Theme.of(context)
-                          .textTheme
-                          .headline5
-                          .copyWith(fontWeight: FontWeight.bold),
-                      textAlign: TextAlign.center,
+                    Container(
+                      margin: EdgeInsets.only(left: 16),
+                      width: 160,
+                      decoration: BoxDecoration(
+                        color: Colors.yellow[300],
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(20.0),
+                        child: Text(
+                          "${widget.drink.productTitle}",
+                          style: Theme.of(context).textTheme.headline5.copyWith(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
                     ),
-                  ),
-                ),
+                    Container(
+                      margin: EdgeInsets.only(left: 16),
+                      width: 160,
+                      decoration: BoxDecoration(
+                        color: Colors.transparent,
+                        borderRadius: BorderRadius.all(
+                          Radius.circular(30),
+                        ),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Text(
+                          "\$${widget.drink.productPriceCalculator()}",
+                          style: Theme.of(context).textTheme.headline5.copyWith(
+                              fontWeight: FontWeight.bold, fontSize: 20),
+                          textAlign: TextAlign.start,
+                        ),
+                      ),
+                    )
+                  ],
+                )
               ],
             ),
           ),
           Align(
-            alignment: Alignment.topRight,
+            alignment: Alignment(0.620, 0.060),
             child: ClipRRect(
               borderRadius: BorderRadius.only(
                 topRight: Radius.circular(5.0),
@@ -76,8 +117,8 @@ class _ItemHotDrinksState extends State<ItemHotDrinks> {
               child: Image.network(
                 "${widget.drink.productImage}",
                 fit: BoxFit.contain,
-                height: 180,
-                width: 180,
+                height: 150,
+                width: 150,
               ),
             ),
           ),
