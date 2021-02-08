@@ -93,9 +93,9 @@ class _ItemHotDrinksState extends State<ItemHotDrinks> {
                         ),
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(2.0),
+                        padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "\$${widget.drink.productPriceCalculator()}",
+                          "\$${widget.drink.productPrice}",
                           style: Theme.of(context).textTheme.headline5.copyWith(
                               fontWeight: FontWeight.bold, fontSize: 20),
                           textAlign: TextAlign.start,

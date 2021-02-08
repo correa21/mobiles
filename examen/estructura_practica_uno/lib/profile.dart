@@ -9,12 +9,6 @@ class Profile extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(PROFILE_TITLE),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.shopping_cart),
-            onPressed: () {},
-          ),
-        ],
       ),
       body: Padding(
         padding: EdgeInsets.all(24.0),
@@ -53,7 +47,9 @@ class Profile extends StatelessWidget {
                 ListTile(
                   title: Text(PROFILE_CART),
                   leading: Icon(Icons.shopping_cart),
-                  onTap: () {},
+                  onTap: () {
+                    //TODO: add navigation to shoping cart
+                  },
                 ),
                 ListTile(
                   title: Text(PROFILE_WISHES),

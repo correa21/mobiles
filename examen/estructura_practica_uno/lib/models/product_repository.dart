@@ -1,17 +1,36 @@
 import 'package:estructura_practica_1/models/product_hot_drinks.dart';
 import 'package:estructura_practica_1/models/product_grains.dart';
 
+import 'product_dessert.dart';
+import 'product_dessert.dart';
+import 'product_dessert.dart';
+
 enum ProductType { BEBIDAS, GRANO, POSTRES }
 
 class ProductRepository {
   static List<dynamic> loadProducts(ProductType prodType) {
     // ----------------------              ----------------------------//
-    // ----------------------       Tazas      ----------------------------//
+    // ----------------------       Postres      ----------------------------//
     // ----------------------              ----------------------------//
 
-    //if (prodType == ProductType.POSTRES) {
-    // TODO: Agregar al menos 5 productos "postres"
-    //}
+    if (prodType == ProductType.POSTRES) {
+      return <ProductDesserts>[
+        ProductDesserts(
+          productTitle: "Lavazza",
+          productDescription: "Endulzado con aromas florales.",
+          productImage:
+              "https://www.lavazza.it/content/dam/lavazza/products/caffe/macinato/moka/qualitaoro/new_render/tin_250_en/Tin-oro-en-250-thumb.png",
+          productAmount: 0,
+        ),
+        ProductDesserts(
+          productTitle: "Guilis",
+          productDescription: "La mezcla de cinco orígenes diferentes.",
+          productImage:
+              "https://www.cafesguilis.com/wp-content/uploads/2018/08/mezcla_especial_1Kg.jpg",
+          productAmount: 0,
+        ),
+      ];
+    }
 
     // ----------------------              ----------------------------//
     // ----------------------       Granos      ----------------------------//
