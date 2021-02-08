@@ -1,11 +1,11 @@
 import 'package:estructura_practica_1/desserts/desserts_page.dart';
+import 'package:estructura_practica_1/grains/grains_page.dart';
 import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/home/item_home.dart';
 import 'package:estructura_practica_1/profile.dart';
 import 'package:estructura_practica_1/drinks/hot_drinks_page.dart';
 
 import '../cart/cart.dart';
-import '../models/product_repository.dart';
 import '../models/product_repository.dart';
 import '../profile.dart';
 
@@ -85,15 +85,17 @@ class _HomeState extends State<Home> {
   void _openGrainsPage() {
     Navigator.of(context).push(
       MaterialPageRoute(
-          builder: (context) => DessertsPage(
-              dessertList:
-                  ProductRepository.loadProducts(ProductType.POSTRES))),
+          builder: (context) => GrainsPage(
+              dessertList: ProductRepository.loadProducts(ProductType.GRANO))),
     );
   }
 
   void _openDessertPage() {
     Navigator.of(context).push(
-      MaterialPageRoute(builder: (context) => null),
+      MaterialPageRoute(
+          builder: (context) => DessertsPage(
+              dessertList:
+                  ProductRepository.loadProducts(ProductType.POSTRES))),
     );
   }
 }

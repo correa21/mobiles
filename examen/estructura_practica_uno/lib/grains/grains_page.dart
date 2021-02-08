@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-import '../models/product_dessert.dart';
-import 'item_desserts.dart';
+import '../models/product_grains.dart';
+import 'item_grains.dart';
 
-class DessertsPage extends StatelessWidget {
-  final List<ProductDesserts> dessertList;
-  DessertsPage({
+class GrainsPage extends StatelessWidget {
+  final List<ProductGrains> dessertList;
+  GrainsPage({
     Key key,
     @required this.dessertList,
   }) : super(key: key);
@@ -19,7 +19,7 @@ class DessertsPage extends StatelessWidget {
       body: ListView.builder(
         itemCount: dessertList.length,
         itemBuilder: (BuildContext context, int index) {
-          return ItemDesserts(
+          return ItemGrains(
             dessert: dessertList[index],
           );
         },

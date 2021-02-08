@@ -2,8 +2,6 @@ import 'package:estructura_practica_1/models/product_hot_drinks.dart';
 import 'package:estructura_practica_1/models/product_grains.dart';
 
 import 'product_dessert.dart';
-import 'product_dessert.dart';
-import 'product_dessert.dart';
 
 enum ProductType { BEBIDAS, GRANO, POSTRES }
 
