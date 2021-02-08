@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 
-import 'home/home.dart';
-import 'utils/constants.dart';
-
 class LoginPage extends StatefulWidget {
   @override
   LoginPage({Key key}) : super(key: key);
@@ -10,7 +7,6 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // TODO: Add text editing controllers (101)
   final _usernameController = TextEditingController();
   final _passwordController = TextEditingController();
   @override
@@ -57,15 +53,18 @@ class _LoginPageState extends State<LoginPage> {
                     onPressed: () {
                       _usernameController.clear();
                       _passwordController.clear();
+                      Navigator.of(context).popAndPushNamed('/firstPage');
                     },
+                    color: Colors.grey,
                   ),
                   // ignore: deprecated_member_use
                   RaisedButton(
-                      child: Text('NEXT'),
-                      onPressed: () {
-                        Navigator.of(context).push(MaterialPageRoute(
-                            builder: (context) => Home(title: APP_TITLE)));
-                      })
+                    child: Text('NEXT'),
+                    onPressed: () {
+                      Navigator.of(context).popAndPushNamed('/home');
+                    },
+                    color: Theme.of(context).accentColor,
+                  )
                 ]),
               ]),
         ));

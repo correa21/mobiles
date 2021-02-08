@@ -77,8 +77,7 @@ class Profile extends StatelessWidget {
                     child: RaisedButton(
                       child: Text(PROFILE_LOGOUT),
                       onPressed: () {
-                        Navigator.of(context)
-                            .popUntil(ModalRoute.withName("/"));
+                        Navigator.of(context).popAndPushNamed("/register");
                       },
                     ),
                   ),

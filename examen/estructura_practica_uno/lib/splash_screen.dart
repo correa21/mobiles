@@ -15,7 +15,7 @@ class _MySplashScreenState extends State<MySplashScreen> {
   Widget build(BuildContext context) {
     return new SplashScreen(
       seconds: 8,
-      navigateAfterSeconds: new LoginPage(),
+      navigateAfterSeconds: new LoadScreen(),
       image: Image.asset(
         'assets/images/logo.png',
         width: MediaQuery.of(context).size.width,

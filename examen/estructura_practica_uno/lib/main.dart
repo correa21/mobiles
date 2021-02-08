@@ -1,8 +1,10 @@
 import 'package:estructura_practica_1/login.dart';
+import 'package:estructura_practica_1/register.dart';
 import 'package:estructura_practica_1/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/home/home.dart';
 import 'package:estructura_practica_1/utils/constants.dart';
+import 'package:splashscreen/splashscreen.dart';
 
 import 'load.dart';
 import 'utils/constants.dart';
@@ -21,7 +23,9 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: '/',
       routes: {
-        '/': (context) => MySplashScreen(),
+        '/': (context) => MySplashScreen(), //MySplashScreen(),
+        '/register': (context) => Register(),
+        '/firstPage': (context) => LoadScreen(),
         '/login': (context) => LoginPage(),
         '/home': (context) => Home(title: APP_TITLE),
       },
