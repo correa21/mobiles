@@ -4,7 +4,6 @@ import 'package:estructura_practica_1/splash_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/home/home.dart';
 import 'package:estructura_practica_1/utils/constants.dart';
-import 'package:splashscreen/splashscreen.dart';
 
 import 'load.dart';
 import 'utils/constants.dart';

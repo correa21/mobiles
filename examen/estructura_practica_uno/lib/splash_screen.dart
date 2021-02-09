@@ -1,5 +1,4 @@
 import 'package:estructura_practica_1/load.dart';
-import 'package:estructura_practica_1/login.dart';
 import 'package:flutter/material.dart';
 import 'package:splashscreen/splashscreen.dart';
 

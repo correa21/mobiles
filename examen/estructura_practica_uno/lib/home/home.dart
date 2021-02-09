@@ -18,9 +18,11 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final _scaffoldKey = GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      key: _scaffoldKey,
       appBar: AppBar(
         title: Text(widget.title),
         actions: <Widget>[
@@ -58,10 +60,16 @@ class _HomeState extends State<Home> {
               image: "https://i.imgur.com/5MZocC1.png",
             ),
           ),
-          ItemHome(
-            // TODO: Al hacer clic, que muestre un snackbar de "Proximamente"
-            title: "Tazas",
-            image: "https://i.imgur.com/fMjtSpy.png",
+          GestureDetector(
+            onTap: () {
+              _scaffoldKey.currentState
+                  .showSnackBar(SnackBar(content: Text('Proximamente!!!')));
+            },
+            child: ItemHome(
+              // TODO: Al hacer clic, que muestre un snackbar de "Proximamente"
+              title: "Tazas",
+              image: "https://i.imgur.com/fMjtSpy.png",
+            ),
           ),
         ],
       ),
@@ -98,4 +106,6 @@ class _HomeState extends State<Home> {
                   ProductRepository.loadProducts(ProductType.POSTRES))),
     );
   }
+
+  void _openMugsPage() {}
 }
