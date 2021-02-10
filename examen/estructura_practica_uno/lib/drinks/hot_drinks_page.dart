@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/drinks/item_hot_drinks.dart';
 import 'package:estructura_practica_1/models/product_hot_drinks.dart';
 
+import 'item_hot_drinks_details.dart';
+
 class HotDrinksPage extends StatelessWidget {
   final List<ProductHotDrinks> drinksList;
   HotDrinksPage({
@@ -18,9 +20,21 @@ class HotDrinksPage extends StatelessWidget {
       body: ListView.builder(
         itemCount: drinksList.length,
         itemBuilder: (BuildContext context, int index) {
-          return ItemHotDrinks(
-            drink: drinksList[index],
-          );
+          return GestureDetector(
+              child: ItemHotDrinks(
+                drink: drinksList[index],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ItemHotDrinkDetail(),
+                    settings: RouteSettings(
+                      arguments: drinksList[index],
+                    ),
+                  ),
+                );
+              });
         },
       ),
     );
