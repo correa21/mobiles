@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/home/home.dart';
 import 'package:estructura_practica_1/utils/constants.dart';
 
-import 'drinks/item_hot_drinks_details.dart';
 import 'load.dart';
 import 'utils/constants.dart';
 

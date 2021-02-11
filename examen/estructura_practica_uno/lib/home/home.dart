@@ -62,11 +62,11 @@ class _HomeState extends State<Home> {
           ),
           GestureDetector(
             onTap: () {
+              _scaffoldKey.currentState.removeCurrentSnackBar();
               _scaffoldKey.currentState
                   .showSnackBar(SnackBar(content: Text('Proximamente!!!')));
             },
             child: ItemHome(
-              // TODO: Al hacer clic, que muestre un snackbar de "Proximamente"
               title: "Tazas",
               image: "https://i.imgur.com/fMjtSpy.png",
             ),
@@ -80,9 +80,6 @@ class _HomeState extends State<Home> {
   }
 
   void _openHotDrinksPage() {
-    // TODO: completar en navigator pasando los parametros
-    // a la pagina de HotDrinksPage
-
     Navigator.of(context).push(
       MaterialPageRoute(
           builder: (context) => HotDrinksPage(
@@ -94,7 +91,7 @@ class _HomeState extends State<Home> {
     Navigator.of(context).push(
       MaterialPageRoute(
           builder: (context) => GrainsPage(
-              dessertList: ProductRepository.loadProducts(ProductType.GRANO))),
+              grainsList: ProductRepository.loadProducts(ProductType.GRANO))),
     );
   }
 
@@ -106,6 +103,4 @@ class _HomeState extends State<Home> {
                   ProductRepository.loadProducts(ProductType.POSTRES))),
     );
   }
-
-  void _openMugsPage() {}
 }

@@ -13,7 +13,6 @@ class ItemHotDrinkDetail extends StatefulWidget {
 }
 
 class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
-  bool _favorite = false;
   bool _chico = false;
   bool _mediano = true;
   bool _grande = false;
@@ -23,7 +22,7 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
     final ProductHotDrinks drink = ModalRoute.of(context).settings.arguments;
     return Scaffold(
         appBar: AppBar(
-          title: Text("NOMBRE DE LA BEBIDA"),
+          title: Text("${drink.productTitle}"),
         ),
         body: Container(
             height: 900,
@@ -31,20 +30,28 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
               Positioned.fill(
                 top: 0,
                 child: Card(
-                    elevation: 4.0,
-                    margin: EdgeInsets.all(24.0),
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(30),
-                    ),
-                    color: Colors.indigo,
-                    child: Image.network(
-                      "${drink.productImage}",
-                      alignment: Alignment.topLeft,
-                      fit: BoxFit.contain,
-                      height: 50,
-                      width: 50,
-                    ) //Container(height: 180),
-                    ),
+                  elevation: 4.0,
+                  margin: EdgeInsets.all(24.0),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(30),
+                  ),
+                  color: Colors.indigo,
+                ),
+              ),
+              Align(
+                alignment: Alignment(0.0, -0.88),
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(5.0),
+                    bottomRight: Radius.circular(5.0),
+                  ),
+                  child: Image.network(
+                    "${drink.productImage}",
+                    fit: BoxFit.contain,
+                    height: 289,
+                    width: 289,
+                  ),
+                ),
               ),
               Positioned(
                 right: 30,
@@ -64,7 +71,6 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
                     onPressed: () {
                       setState(() {
                         drink.liked = !drink.liked;
-                        print(drink.liked);
                       });
                     }),
               ),
@@ -114,6 +120,8 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
                                 setState(() {
                                   if (sel != _chico && true == sel) {
                                     drink.productSize = ProductSize.CH;
+                                    drink.productPrice =
+                                        drink.productPriceCalculator();
                                     _chico = sel;
                                     _mediano = !sel;
                                     _grande = !sel;
@@ -130,6 +138,8 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
                                 setState(() {
                                   if (sel != _mediano && true == sel) {
                                     drink.productSize = ProductSize.M;
+                                    drink.productPrice =
+                                        drink.productPriceCalculator();
                                     _chico = !sel;
                                     _mediano = sel;
                                     _grande = !sel;
@@ -146,6 +156,8 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
                                 setState(() {
                                   if (sel != _grande && true == sel) {
                                     drink.productSize = ProductSize.G;
+                                    drink.productPrice =
+                                        drink.productPriceCalculator();
                                     _chico = !sel;
                                     _mediano = !sel;
                                     _grande = sel;
@@ -154,7 +166,7 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
                               }),
                           SizedBox(width: 5.0),
                           Text(
-                            "\$${drink.productPriceCalculator()}",
+                            "\$${drink.productPrice}",
                             style: Theme.of(context)
                                 .textTheme
                                 .headline5
@@ -167,9 +179,7 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
                         // ignore: deprecated_member_use
                         FlatButton(
                           child: Text('AGREGAR AL CARRITO'),
-                          onPressed: () {
-                            print("${drink.productSize}");
-                          },
+                          onPressed: () {},
                           color: Colors.grey,
                         ),
                         // ignore: deprecated_member_use

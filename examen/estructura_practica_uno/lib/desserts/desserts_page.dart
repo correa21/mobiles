@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../models/product_dessert.dart';
 import 'item_desserts.dart';
+import 'item_desserts_details.dart';
 
 class DessertsPage extends StatelessWidget {
   final List<ProductDesserts> dessertList;
@@ -19,9 +20,21 @@ class DessertsPage extends StatelessWidget {
       body: ListView.builder(
         itemCount: dessertList.length,
         itemBuilder: (BuildContext context, int index) {
-          return ItemDesserts(
-            dessert: dessertList[index],
-          );
+          return GestureDetector(
+              child: ItemDesserts(
+                dessert: dessertList[index],
+              ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => ItemdessertsDetail(),
+                    settings: RouteSettings(
+                      arguments: dessertList[index],
+                    ),
+                  ),
+                );
+              });
         },
       ),
     );

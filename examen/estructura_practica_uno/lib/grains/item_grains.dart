@@ -3,10 +3,10 @@ import 'package:flutter/material.dart';
 import '../models/product_grains.dart';
 
 class ItemGrains extends StatefulWidget {
-  final ProductGrains dessert;
+  final ProductGrains grain;
   ItemGrains({
     Key key,
-    @required this.dessert,
+    @required this.grain,
   }) : super(key: key);
 
   @override
@@ -77,7 +77,7 @@ class _ItemGrainsState extends State<ItemGrains> {
                       child: Padding(
                         padding: const EdgeInsets.all(20.0),
                         child: Text(
-                          "${widget.dessert.productTitle}",
+                          "${widget.grain.productTitle}",
                           style: Theme.of(context).textTheme.headline5.copyWith(
                               fontWeight: FontWeight.bold, fontSize: 20),
                           textAlign: TextAlign.center,
@@ -96,7 +96,7 @@ class _ItemGrainsState extends State<ItemGrains> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          "\$${widget.dessert.productPrice}",
+                          "\$${widget.grain.productPrice}",
                           style: Theme.of(context).textTheme.headline5.copyWith(
                               fontWeight: FontWeight.bold, fontSize: 20),
                           textAlign: TextAlign.start,
@@ -116,7 +116,7 @@ class _ItemGrainsState extends State<ItemGrains> {
                 bottomRight: Radius.circular(5.0),
               ),
               child: Image.network(
-                "${widget.dessert.productImage}",
+                "${widget.grain.productImage}",
                 fit: BoxFit.contain,
                 height: 150,
                 width: 150,
