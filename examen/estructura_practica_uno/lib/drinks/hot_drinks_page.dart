@@ -1,3 +1,4 @@
+import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/drinks/item_hot_drinks.dart';
 import 'package:estructura_practica_1/models/product_hot_drinks.dart';
@@ -6,6 +7,7 @@ import 'item_hot_drinks_details.dart';
 
 class HotDrinksPage extends StatelessWidget {
   final List<ProductHotDrinks> drinksList;
+
   HotDrinksPage({
     Key key,
     @required this.drinksList,
@@ -13,6 +15,7 @@ class HotDrinksPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final ProductCart cartList = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text("Bebidas"),
@@ -28,9 +31,10 @@ class HotDrinksPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ItemHotDrinkDetail(),
+                    builder: (context) =>
+                        ItemHotDrinkDetail(drink: drinksList[index]),
                     settings: RouteSettings(
-                      arguments: drinksList[index],
+                      arguments: cartList,
                     ),
                   ),
                 );

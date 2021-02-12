@@ -1,3 +1,5 @@
+import 'package:estructura_practica_1/models/product_cart.dart';
+import 'package:estructura_practica_1/models/product_item_cart.dart';
 import 'package:flutter/material.dart';
 
 import '../models/product_grains.dart';
@@ -13,6 +15,7 @@ class GrainsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ProductCart cartList = ModalRoute.of(context).settings.arguments;
     return Scaffold(
       appBar: AppBar(
         title: Text("Granos"),
@@ -28,12 +31,15 @@ class GrainsPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context) => ItemGrainsDetail(),
+                    builder: (context) =>
+                        ItemGrainsDetail(grains: grainsList[index]),
                     settings: RouteSettings(
-                      arguments: grainsList[index],
+                      arguments: cartList,
                     ),
                   ),
                 );
+
+                print("${cartList.grains.toString()}");
               });
         },
       ),

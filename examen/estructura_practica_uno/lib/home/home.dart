@@ -1,5 +1,7 @@
 import 'package:estructura_practica_1/desserts/desserts_page.dart';
 import 'package:estructura_practica_1/grains/grains_page.dart';
+import 'package:estructura_practica_1/models/product_cart.dart';
+import 'package:estructura_practica_1/models/product_dessert.dart';
 import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/home/item_home.dart';
 import 'package:estructura_practica_1/profile.dart';
@@ -19,6 +21,7 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  ProductCart cartList = new ProductCart(desserts: [], drinks: [], grains: []);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -83,7 +86,8 @@ class _HomeState extends State<Home> {
     Navigator.of(context).push(
       MaterialPageRoute(
           builder: (context) => HotDrinksPage(
-              drinksList: ProductRepository.loadProducts(ProductType.BEBIDAS))),
+              drinksList: ProductRepository.loadProducts(ProductType.BEBIDAS)),
+          settings: RouteSettings(arguments: cartList)),
     );
   }
 
@@ -91,16 +95,18 @@ class _HomeState extends State<Home> {
     Navigator.of(context).push(
       MaterialPageRoute(
           builder: (context) => GrainsPage(
-              grainsList: ProductRepository.loadProducts(ProductType.GRANO))),
+              grainsList: ProductRepository.loadProducts(ProductType.GRANO)),
+          settings: RouteSettings(arguments: cartList)),
     );
+    print(cartList);
   }
 
   void _openDessertPage() {
     Navigator.of(context).push(
       MaterialPageRoute(
           builder: (context) => DessertsPage(
-              dessertList:
-                  ProductRepository.loadProducts(ProductType.POSTRES))),
+              dessertList: ProductRepository.loadProducts(ProductType.POSTRES)),
+          settings: RouteSettings(arguments: cartList)),
     );
   }
 }

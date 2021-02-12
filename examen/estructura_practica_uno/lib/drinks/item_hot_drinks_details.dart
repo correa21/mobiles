@@ -1,3 +1,4 @@
+import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:estructura_practica_1/models/product_hot_drinks.dart';
 import 'package:flutter/material.dart';
 
@@ -19,10 +20,10 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
 
   @override
   Widget build(BuildContext context) {
-    final ProductHotDrinks drink = ModalRoute.of(context).settings.arguments;
+    final ProductCart cartList = ModalRoute.of(context).settings.arguments;
     return Scaffold(
         appBar: AppBar(
-          title: Text("${drink.productTitle}"),
+          title: Text("${widget.drink.productTitle}"),
         ),
         body: Container(
             height: 900,
@@ -46,7 +47,7 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
                     bottomRight: Radius.circular(5.0),
                   ),
                   child: Image.network(
-                    "${drink.productImage}",
+                    "${widget.drink.productImage}",
                     fit: BoxFit.contain,
                     height: 289,
                     width: 289,
@@ -58,7 +59,7 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
                 top: 30,
                 child: IconButton(
                     //fill icon depending of _favorite state
-                    icon: drink.liked
+                    icon: widget.drink.liked
                         ? Icon(
                             Icons.favorite,
                             color: Color(0xff214254),
@@ -70,7 +71,7 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
                     iconSize: 30,
                     onPressed: () {
                       setState(() {
-                        drink.liked = !drink.liked;
+                        widget.drink.liked = !widget.drink.liked;
                       });
                     }),
               ),
@@ -91,7 +92,7 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
                       ListTile(
                         title: Text(
                           //here goes the product name
-                          "${drink.productTitle}",
+                          "${widget.drink.productTitle}",
                           style: Theme.of(context)
                               .textTheme
                               .headline5
@@ -100,7 +101,7 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
                         ),
                         subtitle: Text(
                           //here goes the product descripton
-                          "${drink.productDescription}",
+                          "${widget.drink.productDescription}",
                           style: Theme.of(context)
                               .textTheme
                               .headline5
@@ -119,9 +120,9 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
                               onSelected: (bool sel) {
                                 setState(() {
                                   if (sel != _chico && true == sel) {
-                                    drink.productSize = ProductSize.CH;
-                                    drink.productPrice =
-                                        drink.productPriceCalculator();
+                                    widget.drink.productSize = ProductSize.CH;
+                                    widget.drink.productPrice =
+                                        widget.drink.productPriceCalculator();
                                     _chico = sel;
                                     _mediano = !sel;
                                     _grande = !sel;
@@ -137,9 +138,9 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
                               onSelected: (bool sel) {
                                 setState(() {
                                   if (sel != _mediano && true == sel) {
-                                    drink.productSize = ProductSize.M;
-                                    drink.productPrice =
-                                        drink.productPriceCalculator();
+                                    widget.drink.productSize = ProductSize.M;
+                                    widget.drink.productPrice =
+                                        widget.drink.productPriceCalculator();
                                     _chico = !sel;
                                     _mediano = sel;
                                     _grande = !sel;
@@ -155,9 +156,9 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
                               onSelected: (bool sel) {
                                 setState(() {
                                   if (sel != _grande && true == sel) {
-                                    drink.productSize = ProductSize.G;
-                                    drink.productPrice =
-                                        drink.productPriceCalculator();
+                                    widget.drink.productSize = ProductSize.G;
+                                    widget.drink.productPrice =
+                                        widget.drink.productPriceCalculator();
                                     _chico = !sel;
                                     _mediano = !sel;
                                     _grande = sel;
@@ -166,7 +167,7 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
                               }),
                           SizedBox(width: 5.0),
                           Text(
-                            "\$${drink.productPrice}",
+                            "\$${widget.drink.productPrice}",
                             style: Theme.of(context)
                                 .textTheme
                                 .headline5

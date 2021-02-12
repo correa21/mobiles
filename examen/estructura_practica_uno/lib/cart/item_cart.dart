@@ -18,13 +18,23 @@ class _ItemCartState extends State<ItemCart> {
   Widget build(BuildContext context) {
     return Card(
         margin: EdgeInsets.all(24),
-        child: Column(
-          children:<Widget>[ Row(
+        child: Column(children: <Widget>[
+         Image.network("${widget.product.productImage}",
+                 fit: BoxFit.contain,
+                 height: 150,
+                 width: 150,),
+             Row(
             children: <Widget>[
               SizedBox(
                 height: 12,
               ),
-              Text("${widget.product.productTitle}"),
+              Text(
+                "${widget.product.productTitle}",
+                style: Theme.of(context)
+                    .textTheme
+                    .headline5
+                    .copyWith(fontWeight: FontWeight.bold),
+              ),
               SizedBox(
                 height: 12,
               ),
@@ -47,7 +57,7 @@ class _ItemCartState extends State<ItemCart> {
               ),
             ],
           ),
-          ]        ));
+        ]));
   }
 
   void _addProd() {

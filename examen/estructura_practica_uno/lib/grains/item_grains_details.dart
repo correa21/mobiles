@@ -1,15 +1,14 @@
 import 'package:estructura_practica_1/cart/cart.dart';
+import 'package:estructura_practica_1/grains/grains_page.dart';
+import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:estructura_practica_1/models/product_grains.dart';
 import 'package:estructura_practica_1/models/product_item_cart.dart';
 import 'package:estructura_practica_1/models/product_repository.dart';
 import 'package:flutter/material.dart';
 
 class ItemGrainsDetail extends StatefulWidget {
-  final ProductGrains grain;
-  ItemGrainsDetail({
-    Key key,
-    this.grain,
-  }) : super(key: key);
+  final ProductGrains grains;
+  ItemGrainsDetail({Key key, @required this.grains}) : super(key: key);
 
   @override
   _ItemGrainsDetailState createState() => _ItemGrainsDetailState();
@@ -21,10 +20,16 @@ class _ItemGrainsDetailState extends State<ItemGrainsDetail> {
 
   @override
   Widget build(BuildContext context) {
-    final ProductGrains grain = ModalRoute.of(context).settings.arguments;
+    final ProductCart cartList = ModalRoute.of(context).settings.arguments;
+    ProductItemCart _prod = ProductItemCart(
+        productAmount: 1,
+        productPrice: widget.grains.productPrice,
+        productTitle: widget.grains.productTitle,
+        productImage: widget.grains.productImage,
+        typeOfProduct: ProductType.GRANO);
     return Scaffold(
         appBar: AppBar(
-          title: Text("${grain.productTitle}"),
+          title: Text("${widget.grains.productTitle}"),
         ),
         body: Container(
             height: 900,
@@ -49,7 +54,7 @@ class _ItemGrainsDetailState extends State<ItemGrainsDetail> {
                     bottomRight: Radius.circular(5.0),
                   ),
                   child: Image.network(
-                    "${grain.productImage}",
+                    "${widget.grains.productImage}",
                     fit: BoxFit.contain,
                     height: 300,
                     width: 300,
@@ -61,7 +66,7 @@ class _ItemGrainsDetailState extends State<ItemGrainsDetail> {
                 top: 30,
                 child: IconButton(
                     //fill icon depending of _favorite state
-                    icon: grain.liked
+                    icon: widget.grains.liked
                         ? Icon(
                             Icons.favorite,
                             color: Color(0xff214254),
@@ -73,7 +78,7 @@ class _ItemGrainsDetailState extends State<ItemGrainsDetail> {
                     iconSize: 30,
                     onPressed: () {
                       setState(() {
-                        grain.liked = !grain.liked;
+                        widget.grains.liked = !widget.grains.liked;
                       });
                     }),
               ),
@@ -94,7 +99,7 @@ class _ItemGrainsDetailState extends State<ItemGrainsDetail> {
                       ListTile(
                         title: Text(
                           //here goes the product name
-                          "${grain.productTitle}",
+                          "${widget.grains.productTitle}",
                           style: Theme.of(context)
                               .textTheme
                               .headline5
@@ -103,7 +108,7 @@ class _ItemGrainsDetailState extends State<ItemGrainsDetail> {
                         ),
                         subtitle: Text(
                           //here goes the product descripton
-                          "${grain.productDescription}",
+                          "${widget.grains.productDescription}",
                           style: Theme.of(context)
                               .textTheme
                               .headline5
@@ -122,9 +127,10 @@ class _ItemGrainsDetailState extends State<ItemGrainsDetail> {
                               onSelected: (bool sel) {
                                 setState(() {
                                   if (sel != _cuarto && true == sel) {
-                                    grain.productWeight = ProductWeight.CUARTO;
-                                    grain.productPrice =
-                                        grain.productPriceCalculator();
+                                    widget.grains.productWeight =
+                                        ProductWeight.CUARTO;
+                                    widget.grains.productPrice =
+                                        widget.grains.productPriceCalculator();
                                     _cuarto = sel;
                                     _kilo = !sel;
                                   }
@@ -139,9 +145,10 @@ class _ItemGrainsDetailState extends State<ItemGrainsDetail> {
                               onSelected: (bool sel) {
                                 setState(() {
                                   if (sel != _kilo && true == sel) {
-                                    grain.productWeight = ProductWeight.KILO;
-                                    grain.productPrice =
-                                        grain.productPriceCalculator();
+                                    widget.grains.productWeight =
+                                        ProductWeight.KILO;
+                                    widget.grains.productPrice =
+                                        widget.grains.productPriceCalculator();
                                     _cuarto = !sel;
                                     _kilo = sel;
                                   }
@@ -150,7 +157,7 @@ class _ItemGrainsDetailState extends State<ItemGrainsDetail> {
                           SizedBox(width: 15.0),
                           SizedBox(width: 5.0),
                           Text(
-                            "\$${grain.productPrice}",
+                            "\$${widget.grains.productPrice}",
                             style: Theme.of(context)
                                 .textTheme
                                 .headline5
@@ -160,26 +167,30 @@ class _ItemGrainsDetailState extends State<ItemGrainsDetail> {
                         ],
                       ),
                       ButtonBar(buttonMinWidth: 159, children: <Widget>[
-                        // ignore: deprecated_member_use
                         FlatButton(
                           child: Text('AGREGAR AL CARRITO'),
-                          onPressed: () {},
+                          onPressed: () {
+                            print(cartList);
+                            if (cartList.grains.isEmpty) {
+                              cartList.grains = <ProductGrains>[widget.grains];
+                            } else {
+                              cartList.grains.add(widget.grains);
+                            }
+                            Navigator.pop(
+                              context,
+                            );
+                          },
                           color: Colors.grey,
                         ),
                         // ignore: deprecated_member_use
                         FlatButton(
                           child: Text('COMPRAR AHORA'),
                           onPressed: () {
-                            ProductItemCart prod = ProductItemCart(
-                                productAmount: grain.productAmount,
-                                productPrice: grain.productPrice,
-                                productTitle: grain.productTitle,
-                                typeOfProduct: ProductType.GRANO);
                             Navigator.push(
                               context,
                               MaterialPageRoute(
                                   builder: (context) => Cart(
-                                        productsList: [prod],
+                                        productsList: [_prod],
                                       )),
                             );
                           },
