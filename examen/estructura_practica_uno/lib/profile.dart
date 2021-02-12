@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/utils/constants.dart';
 
+import 'cart/cart.dart';
+import 'models/product_item_cart.dart';
+
 class Profile extends StatelessWidget {
-  const Profile({Key key}) : super(key: key);
+  final List<ProductItemCart> productsList;
+  const Profile({
+    Key key,
+    this.productsList,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +55,13 @@ class Profile extends StatelessWidget {
                   title: Text(PROFILE_CART),
                   leading: Icon(Icons.shopping_cart),
                   onTap: () {
-                    //TODO: add navigation to shoping cart
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                          builder: (context) => Cart(
+                                productsList: [],
+                              ),
+                          settings: RouteSettings(arguments: productsList)),
+                    );
                   },
                 ),
                 ListTile(
@@ -77,7 +90,7 @@ class Profile extends StatelessWidget {
                     child: RaisedButton(
                       child: Text(PROFILE_LOGOUT),
                       onPressed: () {
-                        Navigator.of(context).popAndPushNamed("/register");
+                        Navigator.of(context).popAndPushNamed("/login");
                       },
                     ),
                   ),

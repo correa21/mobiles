@@ -1,4 +1,6 @@
+import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:estructura_practica_1/models/product_dessert.dart';
+import 'package:estructura_practica_1/pay_page.dart';
 import 'package:flutter/material.dart';
 
 class ItemdessertsDetail extends StatefulWidget {
@@ -15,10 +17,14 @@ class ItemdessertsDetail extends StatefulWidget {
 class _ItemdessertsDetailState extends State<ItemdessertsDetail> {
   @override
   Widget build(BuildContext context) {
-    final ProductDesserts dessert = ModalRoute.of(context).settings.arguments;
+    final ProductCart cartList = ModalRoute.of(context).settings.arguments;
+    final _scaffoldKey = GlobalKey<ScaffoldState>();
+    final snackBar =
+        SnackBar(content: Text('Se a aniadido un producto a tu carrito'));
     return Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
-          title: Text("${dessert.productTitle}"),
+          title: Text("${widget.dessert.productTitle}"),
         ),
         body: Container(
             height: 900,
@@ -33,7 +39,7 @@ class _ItemdessertsDetailState extends State<ItemdessertsDetail> {
                     ),
                     color: Colors.indigo,
                     child: Image.network(
-                      "${dessert.productImage}",
+                      "${widget.dessert.productImage}",
                       alignment: Alignment.topLeft,
                       fit: BoxFit.contain,
                       height: 50,
@@ -46,7 +52,7 @@ class _ItemdessertsDetailState extends State<ItemdessertsDetail> {
                 top: 30,
                 child: IconButton(
                     //fill icon depending of _favorite state
-                    icon: dessert.liked
+                    icon: widget.dessert.liked
                         ? Icon(
                             Icons.favorite,
                             color: Color(0xff214254),
@@ -58,7 +64,7 @@ class _ItemdessertsDetailState extends State<ItemdessertsDetail> {
                     iconSize: 30,
                     onPressed: () {
                       setState(() {
-                        dessert.liked = !dessert.liked;
+                        widget.dessert.liked = !widget.dessert.liked;
                       });
                     }),
               ),
@@ -79,7 +85,7 @@ class _ItemdessertsDetailState extends State<ItemdessertsDetail> {
                       ListTile(
                         title: Text(
                           //here goes the product name
-                          "${dessert.productTitle}",
+                          "${widget.dessert.productTitle}",
                           style: Theme.of(context)
                               .textTheme
                               .headline5
@@ -88,7 +94,7 @@ class _ItemdessertsDetailState extends State<ItemdessertsDetail> {
                         ),
                         subtitle: Text(
                           //here goes the product descripton
-                          "${dessert.productDescription}",
+                          "${widget.dessert.productDescription}",
                           style: Theme.of(context)
                               .textTheme
                               .headline5
@@ -100,13 +106,29 @@ class _ItemdessertsDetailState extends State<ItemdessertsDetail> {
                         // ignore: deprecated_member_use
                         FlatButton(
                           child: Text('AGREGAR AL CARRITO'),
-                          onPressed: () {},
+                          onPressed: () {
+                            if (cartList.desserts.isEmpty) {
+                              cartList.desserts = <ProductDesserts>[
+                                widget.dessert
+                              ];
+                            } else {
+                              cartList.desserts.add(widget.dessert);
+                            }
+                            _scaffoldKey.currentState.showSnackBar(snackBar);
+                          },
                           color: Colors.grey,
                         ),
-                        // ignore: deprecated_member_use
+                        // TODO: PUSH A LA PAGINA DE PAGO
                         FlatButton(
                           child: Text('COMPRAR AHORA'),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      PayPage(product: widget.dessert)),
+                            );
+                          },
                           color: Colors.grey,
                         )
                       ]),

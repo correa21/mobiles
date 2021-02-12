@@ -2,6 +2,8 @@ import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:estructura_practica_1/models/product_hot_drinks.dart';
 import 'package:flutter/material.dart';
 
+import '../pay_page.dart';
+
 class ItemHotDrinkDetail extends StatefulWidget {
   final ProductHotDrinks drink;
   ItemHotDrinkDetail({
@@ -21,7 +23,11 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
   @override
   Widget build(BuildContext context) {
     final ProductCart cartList = ModalRoute.of(context).settings.arguments;
+    final _scaffoldKey = GlobalKey<ScaffoldState>();
+    final snackBar =
+        SnackBar(content: Text('Se a aniadido un producto a tu carrito'));
     return Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           title: Text("${widget.drink.productTitle}"),
         ),
@@ -180,13 +186,31 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
                         // ignore: deprecated_member_use
                         FlatButton(
                           child: Text('AGREGAR AL CARRITO'),
-                          onPressed: () {},
+                          onPressed: () {
+                            widget.drink.productAmount = 1;
+                            if (cartList.drinks.isEmpty) {
+                              cartList.drinks = <ProductHotDrinks>[
+                                widget.drink
+                              ];
+                            } else {
+                              cartList.drinks.add(widget.drink);
+                            }
+                            _scaffoldKey.currentState.showSnackBar(snackBar);
+                          },
                           color: Colors.grey,
                         ),
                         // ignore: deprecated_member_use
                         FlatButton(
                           child: Text('COMPRAR AHORA'),
-                          onPressed: () {},
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => PayPage(
+                                        product: widget.drink,
+                                      )),
+                            );
+                          },
                           color: Colors.grey,
                         )
                       ]),
@@ -197,12 +221,6 @@ class _ItemHotDrinkDetailState extends State<ItemHotDrinkDetail> {
                             topRight: Radius.circular(5.0),
                             bottomRight: Radius.circular(5.0),
                           ),
-                          // child: Image.network(
-                          //   "image",
-                          //   fit: BoxFit.contain,
-                          //   height: 180,
-                          //   width: 180,
-                          // ),
                         ),
                       ),
                     ],

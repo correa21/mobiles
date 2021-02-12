@@ -2,6 +2,9 @@ import 'package:estructura_practica_1/desserts/desserts_page.dart';
 import 'package:estructura_practica_1/grains/grains_page.dart';
 import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:estructura_practica_1/models/product_dessert.dart';
+import 'package:estructura_practica_1/models/product_grains.dart';
+import 'package:estructura_practica_1/models/product_hot_drinks.dart';
+import 'package:estructura_practica_1/models/product_item_cart.dart';
 import 'package:flutter/material.dart';
 import 'package:estructura_practica_1/home/item_home.dart';
 import 'package:estructura_practica_1/profile.dart';
@@ -34,7 +37,7 @@ class _HomeState extends State<Home> {
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) => Cart(
-                    productsList: [],
+                    productsList: _generateItemsList(),
                   ),
                 ));
               })
@@ -77,7 +80,9 @@ class _HomeState extends State<Home> {
         ],
       ),
       drawer: Drawer(
-        child: Profile(),
+        child: Profile(
+          productsList: _generateItemsList(),
+        ),
       ),
     );
   }
@@ -98,7 +103,6 @@ class _HomeState extends State<Home> {
               grainsList: ProductRepository.loadProducts(ProductType.GRANO)),
           settings: RouteSettings(arguments: cartList)),
     );
-    print(cartList);
   }
 
   void _openDessertPage() {
@@ -108,5 +112,47 @@ class _HomeState extends State<Home> {
               dessertList: ProductRepository.loadProducts(ProductType.POSTRES)),
           settings: RouteSettings(arguments: cartList)),
     );
+  }
+
+  List<ProductItemCart> _generateItemsList() {
+    List<ProductItemCart> carrItems = new List<ProductItemCart>();
+    int i = 0;
+    if (null == cartList) {
+    } else {
+      if (cartList.desserts.isNotEmpty) {
+        print('dentro de desserts');
+        print(carrItems);
+        print(cartList);
+        for (ProductDesserts item in cartList.desserts) {
+          carrItems.add(ProductItemCart(
+              productTitle: item.productTitle,
+              productAmount: item.productAmount,
+              productPrice: item.productPrice,
+              productImage: item.productImage,
+              typeOfProduct: ProductType.POSTRES));
+        }
+      }
+      if (cartList.drinks.isNotEmpty) {
+        for (ProductHotDrinks item in cartList.drinks) {
+          carrItems.add(ProductItemCart(
+              productTitle: item.productTitle,
+              productAmount: item.productAmount,
+              productPrice: item.productPrice,
+              productImage: item.productImage,
+              typeOfProduct: ProductType.BEBIDAS));
+        }
+      }
+      if (cartList.grains.isNotEmpty) {
+        for (ProductGrains item in cartList.grains) {
+          carrItems.add(ProductItemCart(
+              productTitle: item.productTitle,
+              productAmount: item.productAmount,
+              productPrice: item.productPrice,
+              productImage: item.productImage,
+              typeOfProduct: ProductType.GRANO));
+        }
+      }
+    }
+    return carrItems;
   }
 }

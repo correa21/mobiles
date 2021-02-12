@@ -16,48 +16,82 @@ class ItemCart extends StatefulWidget {
 class _ItemCartState extends State<ItemCart> {
   @override
   Widget build(BuildContext context) {
-    return Card(
-        margin: EdgeInsets.all(24),
-        child: Column(children: <Widget>[
-         Image.network("${widget.product.productImage}",
-                 fit: BoxFit.contain,
-                 height: 150,
-                 width: 150,),
-             Row(
-            children: <Widget>[
-              SizedBox(
-                height: 12,
+    return Stack(
+      children: [
+        Positioned.fill(
+          top: 16,
+          bottom: -16,
+          child: Card(
+            elevation: 4.0,
+            margin: EdgeInsets.all(24.0),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(30),
+            ),
+            color: Colors.indigo,
+            child: Container(height: 180),
+          ),
+        ),
+        Container(
+          height: 160,
+          margin: EdgeInsets.only(top: 28, bottom: 24, left: 24, right: 24),
+          decoration: BoxDecoration(
+            color: Colors.grey[200],
+            borderRadius: BorderRadius.all(
+              Radius.circular(30),
+            ),
+          ),
+          child: Column(
+            children: [
+              Align(
+                alignment: Alignment.center,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.only(
+                    topRight: Radius.circular(5.0),
+                    bottomRight: Radius.circular(5.0),
+                  ),
+                  child: Image.network(
+                    "${widget.product.productImage}",
+                    fit: BoxFit.contain,
+                    height: 100,
+                    width: 100,
+                  ),
+                ),
               ),
-              Text(
-                "${widget.product.productTitle}",
-                style: Theme.of(context)
-                    .textTheme
-                    .headline5
-                    .copyWith(fontWeight: FontWeight.bold),
-              ),
-              SizedBox(
-                height: 12,
-              ),
-              IconButton(
-                  icon: Icon(Icons.add_circle_outline), onPressed: _addProd),
-              SizedBox(
-                height: 12,
-              ),
-              IconButton(icon: Icon(Icons.remove_circle), onPressed: _remProd),
-              SizedBox(
-                height: 12,
-              ),
-              Text("${widget.product.productAmount}"),
-              SizedBox(
-                height: 12,
-              ),
-              Text("${widget.product.productPrice}"),
-              SizedBox(
-                height: 12,
+              Row(
+                children: <Widget>[
+                  Text(
+                    "${widget.product.productTitle}",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline5
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  IconButton(
+                      icon: Icon(Icons.add_circle_outline),
+                      onPressed: _addProd),
+                  Text(
+                    "${widget.product.productAmount}",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                  IconButton(
+                      icon: Icon(Icons.remove_circle), onPressed: _remProd),
+                  Text(
+                    "\$${widget.product.productPrice}",
+                    style: Theme.of(context)
+                        .textTheme
+                        .headline6
+                        .copyWith(fontWeight: FontWeight.bold),
+                  ),
+                ],
               ),
             ],
           ),
-        ]));
+        ),
+      ],
+    );
   }
 
   void _addProd() {

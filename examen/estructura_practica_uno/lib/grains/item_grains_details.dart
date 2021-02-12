@@ -1,9 +1,6 @@
-import 'package:estructura_practica_1/cart/cart.dart';
-import 'package:estructura_practica_1/grains/grains_page.dart';
 import 'package:estructura_practica_1/models/product_cart.dart';
 import 'package:estructura_practica_1/models/product_grains.dart';
-import 'package:estructura_practica_1/models/product_item_cart.dart';
-import 'package:estructura_practica_1/models/product_repository.dart';
+import 'package:estructura_practica_1/pay_page.dart';
 import 'package:flutter/material.dart';
 
 class ItemGrainsDetail extends StatefulWidget {
@@ -21,13 +18,11 @@ class _ItemGrainsDetailState extends State<ItemGrainsDetail> {
   @override
   Widget build(BuildContext context) {
     final ProductCart cartList = ModalRoute.of(context).settings.arguments;
-    ProductItemCart _prod = ProductItemCart(
-        productAmount: 1,
-        productPrice: widget.grains.productPrice,
-        productTitle: widget.grains.productTitle,
-        productImage: widget.grains.productImage,
-        typeOfProduct: ProductType.GRANO);
+    final _scaffoldKey = GlobalKey<ScaffoldState>();
+    final snackBar =
+        SnackBar(content: Text('Se a aniadido un producto a tu carrito'));
     return Scaffold(
+        key: _scaffoldKey,
         appBar: AppBar(
           title: Text("${widget.grains.productTitle}"),
         ),
@@ -166,37 +161,11 @@ class _ItemGrainsDetailState extends State<ItemGrainsDetail> {
                           ),
                         ],
                       ),
-                      ButtonBar(buttonMinWidth: 159, children: <Widget>[
-                        FlatButton(
-                          child: Text('AGREGAR AL CARRITO'),
-                          onPressed: () {
-                            print(cartList);
-                            if (cartList.grains.isEmpty) {
-                              cartList.grains = <ProductGrains>[widget.grains];
-                            } else {
-                              cartList.grains.add(widget.grains);
-                            }
-                            Navigator.pop(
-                              context,
-                            );
-                          },
-                          color: Colors.grey,
-                        ),
-                        // ignore: deprecated_member_use
-                        FlatButton(
-                          child: Text('COMPRAR AHORA'),
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => Cart(
-                                        productsList: [_prod],
-                                      )),
-                            );
-                          },
-                          color: Colors.grey,
-                        )
-                      ]),
+                      BuyButtons(
+                          widget: widget,
+                          cartList: cartList,
+                          scaffoldKey: _scaffoldKey,
+                          snackBar: snackBar),
                       Align(
                         alignment: Alignment.topRight,
                         child: ClipRRect(
@@ -211,5 +180,55 @@ class _ItemGrainsDetailState extends State<ItemGrainsDetail> {
                 ),
               )
             ])));
+  }
+}
+
+class BuyButtons extends StatelessWidget {
+  const BuyButtons({
+    Key key,
+    @required this.widget,
+    @required this.cartList,
+    @required GlobalKey<ScaffoldState> scaffoldKey,
+    @required this.snackBar,
+  })  : _scaffoldKey = scaffoldKey,
+        super(key: key);
+
+  final ItemGrainsDetail widget;
+  final ProductCart cartList;
+  final GlobalKey<ScaffoldState> _scaffoldKey;
+  final SnackBar snackBar;
+
+  @override
+  Widget build(BuildContext context) {
+    return ButtonBar(buttonMinWidth: 159, children: <Widget>[
+      FlatButton(
+        child: Text('AGREGAR AL CARRITO'),
+        onPressed: () {
+          widget.grains.productAmount = 1;
+          if (cartList.grains.isEmpty) {
+            cartList.grains = <ProductGrains>[widget.grains];
+          } else {
+            cartList.grains.add(widget.grains);
+          }
+          _scaffoldKey.currentState.showSnackBar(snackBar);
+        },
+        color: Colors.grey,
+      ),
+      // ignore: deprecated_member_use
+      FlatButton(
+        child: Text('COMPRAR AHORA'),
+        onPressed: () {
+          //TODO: el push debe de ser a la pagina de pagos
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => PayPage(
+                      product: widget.grains,
+                    )),
+          );
+        },
+        color: Colors.grey,
+      )
+    ]);
   }
 }
