@@ -48,6 +48,8 @@ class HomeBloc extends Bloc<HomeEvent, HomeState> {
       listSize = list1.length;
       count = 0;
       index = 0;
+      list1.shuffle();
+      list2.shuffle();
       yield HomeInitial();
     }
   }
