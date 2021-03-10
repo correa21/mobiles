@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 
 void main() async {
   //TODO: inicializar hive y registrar adapters
-  runApp(MyApp());
+    WidgetsFlutterBinding.ensureInitialized();
+    //final _localStorage await get
+    runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {

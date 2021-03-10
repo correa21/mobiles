@@ -22,5 +22,6 @@ class Product {
     this.favorite = false,
     this.ranking = 5,
     this.amount = 1,
+
   });
 }
