@@ -1,4 +1,6 @@
 import 'package:flutter/foundation.dart';
+import 'package:hive/hive.dart';
+part 'product.g.dart';
 
 // TODO: crear adapter
 class Product {
