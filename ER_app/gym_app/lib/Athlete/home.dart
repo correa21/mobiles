@@ -17,21 +17,37 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        title: Text('${widget.title}'),
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.shopping_cart), onPressed: () {})
-        ],
-      ),
-      body: ListView(
-        children: <Widget>[
-          GestureDetector(
-              child: ListTile(
-            title: Text('Curl'),
-          )),
-        ],
-      ),
-    );
+        key: _scaffoldKey,
+        appBar: AppBar(
+          title: Text('${widget.title}'),
+          actions: <Widget>[
+            IconButton(icon: Icon(Icons.search_rounded), onPressed: () {}),
+            IconButton(icon: Icon(Icons.more_vert_rounded), onPressed: () {})
+          ],
+        ),
+        drawer: Profile(),
+        body: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(children: [
+            ListTile(
+              title: Text('EL musculo de hoy es: Biceps'),
+              subtitle: Text('3 series x 12 reps'),
+              trailing: Expanded(
+                child: Image.network(
+                  'https://muscleseek.com/wp-content/uploads/2013/12/big-bicep.jpg',
+                  fit: BoxFit.contain,
+                ),
+              ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Container(
+                child: ListTile(
+              title: Text('Curl'),
+              subtitle: Text('3 series x 12 reps'),
+            ))
+          ]),
+        ));
   }
 }

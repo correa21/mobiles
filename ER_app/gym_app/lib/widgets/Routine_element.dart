@@ -4,10 +4,16 @@ import 'package:gym_app/widgets/Counter.dart';
 class RoutineElement extends StatefulWidget {
   final String title;
   final String image;
+  final int rep;
+  final int series;
+  final String description;
   RoutineElement({
     Key key,
     @required this.title,
     @required this.image,
+    this.rep,
+    this.series,
+    this.description,
   }) : super(key: key);
 
   @override
