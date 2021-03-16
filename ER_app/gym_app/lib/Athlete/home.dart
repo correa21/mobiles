@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/widgets/Exercise_description.dart';
 import 'package:gym_app/widgets/Routine_element.dart';
 import 'package:gym_app/widgets/coach_exercise.dart';
 import '../profile.dart';
@@ -32,7 +33,7 @@ class _HomeState extends State<Home> {
             ListTile(
               title: Text('EL musculo de hoy es: Biceps'),
               subtitle: Text('3 series x 12 reps'),
-              trailing: Expanded(
+              trailing: Container(
                 child: Image.network(
                   'https://muscleseek.com/wp-content/uploads/2013/12/big-bicep.jpg',
                   fit: BoxFit.contain,
@@ -40,13 +41,34 @@ class _HomeState extends State<Home> {
               ),
             ),
             SizedBox(
-              height: 5,
+              height: 2,
             ),
             Container(
-                child: ListTile(
-              title: Text('Curl'),
-              subtitle: Text('3 series x 12 reps'),
-            ))
+              height: MediaQuery.of(context).size.height - 170,
+              child: ListView(
+                children: <Widget>[
+                  GestureDetector(
+                    child: ListTile(
+                      title: Text('Curl'),
+                      subtitle: Text('3 series x 12 reps'),
+                    ),
+                    onTap: () {
+                      showBottomSheet(
+                        context: context,
+                        elevation: 30000,
+                        backgroundColor: Colors.black54,
+                        builder: (BuildContext context) {
+                          return ExerciseDescription(
+                            key: _scaffoldKey,
+                            title: 'CURL',
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ],
+              ),
+            )
           ]),
         ));
   }

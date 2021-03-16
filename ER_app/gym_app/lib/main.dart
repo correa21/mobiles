@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/widgets/Exercise_description.dart';
 import 'Athlete/home.dart';
 import 'widgets/coach_exercise.dart';
 import 'profile.dart';
@@ -9,9 +10,10 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'MaterialApp',
-      theme: ThemeData(primaryColor: Colors.indigo),
-      home: Home(),
-    );
+        title: 'MaterialApp',
+        theme: ThemeData(primaryColor: Colors.indigo),
+        home: Scaffold(
+          body: Home(),
+        ));
   }
 }
