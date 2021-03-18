@@ -53,10 +53,10 @@ class _HomeState extends State<Home> {
                       subtitle: Text('3 series x 12 reps'),
                     ),
                     onTap: () {
-                      showBottomSheet(
+                      showModalBottomSheet(
                         context: context,
                         elevation: 30000,
-                        backgroundColor: Colors.black54,
+                        backgroundColor: Colors.transparent,
                         builder: (BuildContext context) {
                           return ExerciseDescription(
                             key: _scaffoldKey,
