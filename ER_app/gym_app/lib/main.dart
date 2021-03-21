@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:gym_app/widgets/Exercise_description.dart';
 import 'Athlete/home.dart';
-import 'widgets/coach_exercise.dart';
-import 'profile.dart';
-
+import 'Coach/coach_home.dart';
+import 'Coach/coach_athletes.dart';
+import 'login.dart';
+import 'load.dart';
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -12,8 +12,13 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
         title: 'MaterialApp',
         theme: ThemeData(primaryColor: Colors.indigo),
-        home: Scaffold(
-          body: Home(),
-        ));
+        initialRoute: '/',
+        routes: {
+            '/': (context)=> LoginPage(),
+            '/usr/athlete':(context)=>Home(),
+            '/usr/coach/routine': (context)=> CoachHome(),
+            '/usr/coach/athleteList': (context)=> CoachAthletes(),
+
+        },);
   }
 }

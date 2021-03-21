@@ -1,12 +1,18 @@
+import 'dart:io';
+import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 
-class ExerciseDescription extends StatelessWidget {
-  final String title;
-  final String image;
-  final String description;
-  const ExerciseDescription({Key key, @required this.title,
-  @required this.image, @required this.description}) : super(key: key);
+class NewExcersise extends StatefulWidget {
+  const NewExcersise({
+    Key key,
+  }) : super(key: key);
+  @override
+  _NewExcersiseState createState() => _NewExcersiseState();
+}
 
+class _NewExcersiseState extends State<NewExcersise> {
+  File _image;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -26,7 +32,7 @@ class ExerciseDescription extends StatelessWidget {
             ),
           ),
           Positioned(
-            top: MediaQuery.of(context).size.height - 763,
+            top: MediaQuery.of(context).size.height - 730,
             left: MediaQuery.of(context).size.width - 310,
             child: Container(
               margin: EdgeInsets.only(left: 16),
@@ -35,12 +41,18 @@ class ExerciseDescription extends StatelessWidget {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   Container(
-                    height: 125,
+                    height: 115,
                     width: 2000,
-                    child: Image.network(
-                        image),
+                    child: IconButton(
+                      icon: Icon(Icons.add_a_photo),
+                      onPressed: () {
+                        try {
+                          _pickImage();
+                        } catch (e) {}
+                      },
+                    ),
                     decoration: BoxDecoration(
-                      color: Colors.transparent,
+                      color: Colors.red,
                       borderRadius: BorderRadius.all(
                         Radius.circular(30),
                       ),
@@ -56,13 +68,9 @@ class ExerciseDescription extends StatelessWidget {
             child: Container(
               height: MediaQuery.of(context).size.height * 0.10,
               width: MediaQuery.of(context).size.width - 80,
-              child: Text(
-                "${title}",
-                style: Theme.of(context)
-                    .textTheme
-                    .headline5
-                    .copyWith(fontWeight: FontWeight.bold),
-                textAlign: TextAlign.left,
+              child: TextField(
+                decoration: InputDecoration(
+                    border: InputBorder.none, hintText: 'Nombre del ejercicio'),
               ),
             ),
           ),
@@ -72,13 +80,38 @@ class ExerciseDescription extends StatelessWidget {
             child: Container(
               height: MediaQuery.of(context).size.height * .20,
               width: MediaQuery.of(context).size.width - 80,
-              child: Text(description,
-                style: TextStyle(fontSize: 18),
+              child: TextField(
+                decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Descripción del ejercicio'),
               ),
             ),
           ),
+          Positioned(
+            bottom: MediaQuery.of(context).size.height - 750,
+            child: MaterialButton(
+              onPressed: () {},
+            ),
+          )
         ],
       ),
     );
+  }
+
+  Future _pickImage() async {
+    final picker = ImagePicker();
+    final PickedFile choosenImage = await picker.getImage(
+      source: ImageSource.camera,
+      maxHeight: 720,
+      maxWidth: 720,
+      imageQuality: 85,
+    );
+    setState(() {
+      if (choosenImage != null) {
+        _image = File(choosenImage.path);
+      } else {
+        print('No image selected');
+      }
+    });
   }
 }

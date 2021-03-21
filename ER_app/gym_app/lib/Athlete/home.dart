@@ -20,7 +20,7 @@ class _HomeState extends State<Home> {
     return Scaffold(
         key: _scaffoldKey,
         appBar: AppBar(
-          title: Text('${widget.title}'),
+          title: Text('Bienvenido Usuario!'),
           actions: <Widget>[
             IconButton(icon: Icon(Icons.search_rounded), onPressed: () {}),
             IconButton(icon: Icon(Icons.more_vert_rounded), onPressed: () {})
@@ -31,8 +31,14 @@ class _HomeState extends State<Home> {
           padding: const EdgeInsets.all(8.0),
           child: Column(children: [
             ListTile(
-              title: Text('EL musculo de hoy es: Biceps'),
-              subtitle: Text('3 series x 12 reps'),
+              title: Text(
+                'EL musculo de hoy es: Biceps',
+                style: Theme.of(context)
+                    .textTheme
+                    .headline5
+                    .copyWith(fontWeight: FontWeight.bold),
+                textAlign: TextAlign.left,
+              ),
               trailing: Container(
                 child: Image.network(
                   'https://muscleseek.com/wp-content/uploads/2013/12/big-bicep.jpg',
@@ -44,12 +50,25 @@ class _HomeState extends State<Home> {
               height: 2,
             ),
             Container(
-              height: MediaQuery.of(context).size.height - 170,
-              child: ListView(
+              height: MediaQuery.of(context).size.height - 270,
+              child:   ListView(
                 children: <Widget>[
                   GestureDetector(
                     child: ListTile(
-                      title: Text('Curl'),
+                        leading:  Container(
+                child: Image.network(
+                  'https://muscleseek.com/wp-content/uploads/2013/12/big-bicep.jpg',
+                  fit: BoxFit.contain,
+                ),
+              ),
+                      title: Text(
+                        'Curl',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline5
+                            .copyWith(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.left,
+                      ),
                       subtitle: Text('3 series x 12 reps'),
                     ),
                     onTap: () {
@@ -58,15 +77,52 @@ class _HomeState extends State<Home> {
                         elevation: 30000,
                         backgroundColor: Colors.transparent,
                         builder: (BuildContext context) {
-                          return ExerciseDescription(
+                          return  ExerciseDescription(
                             key: _scaffoldKey,
-                            title: 'CURL',
+                            title: 'Curl',
+                            image: 
+                  'https://muscleseek.com/wp-content/uploads/2013/12/big-bicep.jpg',
+                            description: 'very very very loooong description of the excercise',
+                          );
+                        },
+                      );
+                    },
+                  ),GestureDetector(
+                    child: ListTile(
+                        leading:  Container(
+                child: Image.network(
+                  'https://muscleseek.com/wp-content/uploads/2013/12/big-bicep.jpg',
+                  fit: BoxFit.contain,
+                ),
+              ),
+                      title: Text(
+                        'Curl',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline5
+                            .copyWith(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.left,
+                      ),
+                      subtitle: Text('3 series x 12 reps'),
+                    ),
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        elevation: 30000,
+                        backgroundColor: Colors.transparent,
+                        builder: (BuildContext context) {
+                          return  ExerciseDescription(
+                            key: _scaffoldKey,
+                            title: 'Curl',
+                            image: 
+                  'https://muscleseek.com/wp-content/uploads/2013/12/big-bicep.jpg',
+                            description: 'very very very loooong description of the excercise',
                           );
                         },
                       );
                     },
                   ),
-                ],
+               ],
               ),
             )
           ]),

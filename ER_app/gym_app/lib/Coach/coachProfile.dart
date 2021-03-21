@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
-import 'widgets/Counter.dart';
+import 'package:gym_app/constants.dart';
 
-class Profile extends StatelessWidget {
-  const Profile({
+class CoachProfile extends StatelessWidget {
+  const CoachProfile({
     Key key,
   }) : super(key: key);
 
@@ -52,13 +51,19 @@ class Profile extends StatelessWidget {
                   ListTile(
                     title: Text(PROFILE_ROUTINE),
                     leading: Icon(Icons.fitness_center),
-                    onTap: () {},
+                    onTap: () {
+                        Navigator.of(context).popAndPushNamed('/usr/coach/routine');
+                    },
                   ),
-                  ListTile(
-                    title: Text(PROFILE_NUTRITION),
-                    leading: Icon(Icons.free_breakfast),
-                    onTap: () {},
+                                  ListTile(
+
+                          title: Text(PROFILE_COACH_ATHLETE),
+                    leading: Icon(Icons.person),
+                    onTap: () {
+                            Navigator.of(context).popAndPushNamed('/usr/coach/athleteList');
+                    },
                   ),
+
                 ],
               ),
               Align(
