@@ -148,10 +148,11 @@ class FormBody extends StatelessWidget {
             children: [
               Expanded(
                 child: FacebookAuthButton(
-                  onPressed: () => onFacebookLoginTap(true),
-                  text: "Iniciar con Facebook",
-                  borderRadius: 18.0,
-                ),
+                    onPressed: () => onFacebookLoginTap(true),
+                    text: "Iniciar con Facebook",
+                    style: AuthButtonStyle(
+                      borderRadius: 18.0,
+                    )),
               ),
             ],
           ),
@@ -166,8 +167,10 @@ class FormBody extends StatelessWidget {
                 child: GoogleAuthButton(
                   onPressed: () => onGoogleLoginTap(true),
                   text: "Iniciar con Google",
-                  borderRadius: 18.0,
                   darkMode: false,
+                  style: AuthButtonStyle(
+                    borderRadius: 18.0,
+                  ),
                 ),
               ),
             ],

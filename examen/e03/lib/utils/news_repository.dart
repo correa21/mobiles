@@ -5,6 +5,8 @@ import 'package:google_login/models/new.dart';
 import 'package:google_login/utils/secrets.dart';
 import 'package:http/http.dart';
 
+
+
 class NewsRepository {
   List<New> _noticiasList;
 
@@ -25,8 +27,8 @@ class NewsRepository {
       path: 'v2/top-headlines',
       queryParameters: {
         "country": "mx",
-        "category": "sports",
-        "apiKey": apiKey
+        "category": "$query",
+        "apiKey": API_KEY 
       },
     );
     // TODO: completar request y deserializacion

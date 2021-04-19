@@ -17,12 +17,12 @@ class _HomePageState extends State<HomePage> {
   final _titulosList = [
     "Deportes",
     "Mis noticias",
-    "???",
+    "Nueva noticia",
   ];
   final _pagesList = [
     NoticiasDeportes(),
     MisNoticias(),
-    PantallaTres(),
+    NuevaNoticia(),
   ];
   @override
   Widget build(BuildContext context) {
@@ -61,7 +61,7 @@ class _HomePageState extends State<HomePage> {
             label: "${_titulosList[1]}",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.thumb_up),
+            icon: Icon(Icons.add_circle_rounded),
             label: "${_titulosList[2]}",
           ),
         ],
