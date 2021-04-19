@@ -14,6 +14,7 @@ part 'my_news_state.dart';
 
 class MyNewsBloc extends Bloc<MyNewsEvent, MyNewsState> {
   final _cFirestore = FirebaseFirestore.instance;
+  //Box _newsLocalRepo = Hive.box("News");
   File _selectedPicture;
 
   MyNewsBloc() : super(MyNewsInitial());
@@ -40,7 +41,7 @@ class MyNewsBloc extends Bloc<MyNewsEvent, MyNewsState> {
       if (imageUrl != null) {
         yield LoadingState();
         await _saveNoticias(event.noticia.copyWith(urlToImage: imageUrl));
-         yield LoadedNewsState(noticiasList: await _getNoticias() ?? []);
+        yield LoadedNewsState(noticiasList: await _getNoticias() ?? []);
         yield SavedNewState();
       } else {
         yield ErrorMessageState(errorMsg: "No se pudo guardar la imagen");
@@ -75,6 +76,7 @@ class MyNewsBloc extends Bloc<MyNewsEvent, MyNewsState> {
 
   Future<bool> _saveNoticias(New noticia) async {
     try {
+      print(noticia.toString());
       await _cFirestore.collection("noticias").add(noticia.toJson());
       return true;
     } catch (e) {
@@ -89,6 +91,7 @@ class MyNewsBloc extends Bloc<MyNewsEvent, MyNewsState> {
   Future<List<New>> _getNoticias() async {
     try {
       var noticias = await _cFirestore.collection("noticias").get();
+
       return noticias.docs
           .map(
             (element) => New(
