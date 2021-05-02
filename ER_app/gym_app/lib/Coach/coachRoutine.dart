@@ -5,15 +5,15 @@ import 'package:gym_app/widgets/New_Excersise.dart';
 import 'package:gym_app/widgets/coach_exercise.dart';
 import '../profile.dart';
 
-class CoachHome extends StatefulWidget {
+class CoachRoutine extends StatefulWidget {
   final String title;
-  CoachHome({Key key, this.title}) : super(key: key);
+  CoachRoutine({Key key, this.title}) : super(key: key);
 
   @override
-  _CoachHomeState createState() => _CoachHomeState();
+  _CoachRoutineState createState() => _CoachRoutineState();
 }
 
-class _CoachHomeState extends State<CoachHome> {
+class _CoachRoutineState extends State<CoachRoutine> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override

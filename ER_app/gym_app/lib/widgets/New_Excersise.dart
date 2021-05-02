@@ -16,7 +16,7 @@ class _NewExcersiseState extends State<NewExcersise> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.75,
+      height: MediaQuery.of(context).size.height * 0.55,
       child: Stack(
         children: [
           Positioned.fill(
@@ -32,7 +32,7 @@ class _NewExcersiseState extends State<NewExcersise> {
             ),
           ),
           Positioned(
-            top: MediaQuery.of(context).size.height - 730,
+            top: MediaQuery.of(context).size.height / 90,
             left: MediaQuery.of(context).size.width - 310,
             child: Container(
               margin: EdgeInsets.only(left: 16),
@@ -52,7 +52,7 @@ class _NewExcersiseState extends State<NewExcersise> {
                       },
                     ),
                     decoration: BoxDecoration(
-                      color: Colors.red,
+                      color: Colors.grey,
                       borderRadius: BorderRadius.all(
                         Radius.circular(30),
                       ),
@@ -88,9 +88,15 @@ class _NewExcersiseState extends State<NewExcersise> {
             ),
           ),
           Positioned(
-            bottom: MediaQuery.of(context).size.height - 750,
+            bottom: MediaQuery.of(context).size.height / 20,
+            left: MediaQuery.of(context).size.width - 150,
             child: MaterialButton(
-              onPressed: () {},
+              child: Text('Guardar'),
+              color: Colors.indigo,
+              textColor: Colors.white,
+              onPressed: () {
+                //TODO: PUT ELEMENT TO DATA BASE
+              },
             ),
           )
         ],

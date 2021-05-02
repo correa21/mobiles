@@ -72,14 +72,14 @@ class _CoachExerciseState extends State<CoachExercise> {
             ),
           ),
           Positioned(
-            top: 80,
-            left: 246,
+            top: MediaQuery.of(context).size.height - 80,
+            left: MediaQuery.of(context).size.width - 246,
             child: Counter(
               onDecrement: (_series) {},
               onIncrement: (_series) {},
               title: 'Series',
             ),
-          )
+          ),
         ],
       ),
     );

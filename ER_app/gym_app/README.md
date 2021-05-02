@@ -14,3 +14,18 @@ A few resources to get you started if this is your first Flutter project:
 For help getting started with Flutter, view our
 [online documentation](https://flutter.dev/docs), which offers tutorials,
 samples, guidance on mobile development, and a full API reference.
+
+TODO:
+- implement block builder of authentication in main file and a splash screen
+
+- authentication bloc as singleton
+
+- Change drawer to bottom navigation bar
+
+- Consume api 
+
+- At athlete routine page add a startup bloc event to get the newest routine and implement bloc consumer as child of bloc provider and use a refresh indicator
+
+- wrap evreting in a single child scroll
+
+- implement hive for storing the routine list to work without internet
