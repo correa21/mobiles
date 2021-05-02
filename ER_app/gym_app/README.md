@@ -26,6 +26,6 @@ TODO:
 
 - At athlete routine page add a startup bloc event to get the newest routine and implement bloc consumer as child of bloc provider and use a refresh indicator
 
-- wrap evreting in a single child scroll
+- Fix new exersice card to go full screen
 
 - implement hive for storing the routine list to work without internet

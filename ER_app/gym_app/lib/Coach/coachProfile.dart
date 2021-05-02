@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gym_app/Coach/bloc/coach_bloc.dart';
 import 'package:gym_app/constants.dart';
 
 class CoachProfile extends StatelessWidget {
+  final CoachBloc bloc;
   const CoachProfile({
     Key key,
+    @required this.bloc,
   }) : super(key: key);
 
   @override
@@ -52,18 +56,16 @@ class CoachProfile extends StatelessWidget {
                     title: Text(PROFILE_ROUTINE),
                     leading: Icon(Icons.fitness_center),
                     onTap: () {
-                        Navigator.of(context).popAndPushNamed('/usr/coach/routine');
+                      bloc.add(NewRoutineEvent());
                     },
                   ),
-                                  ListTile(
-
-                          title: Text(PROFILE_COACH_ATHLETE),
+                  ListTile(
+                    title: Text(PROFILE_COACH_ATHLETE),
                     leading: Icon(Icons.person),
                     onTap: () {
-                            Navigator.of(context).popAndPushNamed('/usr/coach/athleteList');
+                      bloc.add(ShowAthleteListEvent());
                     },
                   ),
-
                 ],
               ),
               Align(
@@ -75,7 +77,7 @@ class CoachProfile extends StatelessWidget {
                       child: RaisedButton(
                         child: Text(PROFILE_LOGOUT),
                         onPressed: () {
-                            Navigator.of(context).popAndPushNamed('/');
+                          Navigator.of(context).popAndPushNamed('/');
                         },
                       ),
                     ),

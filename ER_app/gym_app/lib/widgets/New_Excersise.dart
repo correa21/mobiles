@@ -16,11 +16,12 @@ class _NewExcersiseState extends State<NewExcersise> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: MediaQuery.of(context).size.height * 0.55,
+      padding:
+          EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
       child: Stack(
         children: [
           Positioned.fill(
-            top: MediaQuery.of(context).size.height * 0.05,
+            top: MediaQuery.of(context).size.height * 2 / 16,
             child: Card(
               elevation: 4.0,
               margin: EdgeInsets.all(24.0),
@@ -32,7 +33,7 @@ class _NewExcersiseState extends State<NewExcersise> {
             ),
           ),
           Positioned(
-            top: MediaQuery.of(context).size.height / 90,
+            top: MediaQuery.of(context).size.height / 10,
             left: MediaQuery.of(context).size.width - 310,
             child: Container(
               margin: EdgeInsets.only(left: 16),
@@ -63,27 +64,27 @@ class _NewExcersiseState extends State<NewExcersise> {
             ),
           ),
           Positioned(
-            bottom: MediaQuery.of(context).size.height - 580,
+            bottom: MediaQuery.of(context).size.height - 620,
             left: MediaQuery.of(context).size.width - 350,
             child: Container(
               height: MediaQuery.of(context).size.height * 0.10,
               width: MediaQuery.of(context).size.width - 80,
               child: TextField(
                 decoration: InputDecoration(
-                    border: InputBorder.none, hintText: 'Nombre del ejercicio'),
+                  hintText: 'Nombre del ejercicio',
+                ),
               ),
             ),
           ),
           Positioned(
-            bottom: MediaQuery.of(context).size.height - 750,
+            bottom: MediaQuery.of(context).size.height - 770,
             left: MediaQuery.of(context).size.width - 350,
             child: Container(
               height: MediaQuery.of(context).size.height * .20,
               width: MediaQuery.of(context).size.width - 80,
               child: TextField(
-                decoration: InputDecoration(
-                    border: InputBorder.none,
-                    hintText: 'Descripción del ejercicio'),
+                decoration:
+                    InputDecoration(hintText: 'Descripción del ejercicio'),
               ),
             ),
           ),

@@ -4,8 +4,12 @@ class ExerciseDescription extends StatelessWidget {
   final String title;
   final String image;
   final String description;
-  const ExerciseDescription({Key key, @required this.title,
-  @required this.image, @required this.description}) : super(key: key);
+  const ExerciseDescription(
+      {Key key,
+      @required this.title,
+      @required this.image,
+      @required this.description})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +41,7 @@ class ExerciseDescription extends StatelessWidget {
                   Container(
                     height: 125,
                     width: 2000,
-                    child: Image.network(
-                        image),
+                    child: Image.network(image),
                     decoration: BoxDecoration(
                       color: Colors.transparent,
                       borderRadius: BorderRadius.all(
@@ -72,7 +75,8 @@ class ExerciseDescription extends StatelessWidget {
             child: Container(
               height: MediaQuery.of(context).size.height * .20,
               width: MediaQuery.of(context).size.width - 80,
-              child: Text(description,
+              child: Text(
+                description,
                 style: TextStyle(fontSize: 18),
               ),
             ),

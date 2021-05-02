@@ -52,8 +52,7 @@ class _LoginPageState extends State<LoginPage> {
             ElevatedButton(
                 onPressed: () {
                   (_usernameController.text == 'coach')
-                      ? Navigator.of(context)
-                          .popAndPushNamed('/usr/coach/athleteList')
+                      ? Navigator.of(context).popAndPushNamed('/usr/coach')
                       : Navigator.of(context).popAndPushNamed('/usr/athlete');
                 },
                 child: Text(

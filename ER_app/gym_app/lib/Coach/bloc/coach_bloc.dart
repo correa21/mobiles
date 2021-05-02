@@ -13,6 +13,11 @@ class CoachBloc extends Bloc<CoachEvent, CoachState> {
   Stream<CoachState> mapEventToState(
     CoachEvent event,
   ) async* {
-    // TODO: implement mapEventToState
+    if (event is ShowAthleteListEvent) {
+      //TODO: pull athlete list
+      yield ShowAthletsState();
+    } else if (event is NewRoutineEvent) {
+      yield NewRoutineState();
+    }
   }
 }

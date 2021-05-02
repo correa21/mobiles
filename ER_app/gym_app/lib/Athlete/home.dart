@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gym_app/widgets/Exercise_description.dart';
 import 'package:gym_app/widgets/Routine_element.dart';
 import 'package:gym_app/widgets/coach_exercise.dart';
-import '../profile.dart';
+import 'profile.dart';
 
 class Home extends StatefulWidget {
   final String title;
@@ -51,16 +51,16 @@ class _HomeState extends State<Home> {
             ),
             Container(
               height: MediaQuery.of(context).size.height - 270,
-              child:   ListView(
+              child: ListView(
                 children: <Widget>[
                   GestureDetector(
                     child: ListTile(
-                        leading:  Container(
-                child: Image.network(
-                  'https://muscleseek.com/wp-content/uploads/2013/12/big-bicep.jpg',
-                  fit: BoxFit.contain,
-                ),
-              ),
+                      leading: Container(
+                        child: Image.network(
+                          'https://muscleseek.com/wp-content/uploads/2013/12/big-bicep.jpg',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
                       title: Text(
                         'Curl',
                         style: Theme.of(context)
@@ -77,52 +77,55 @@ class _HomeState extends State<Home> {
                         elevation: 30000,
                         backgroundColor: Colors.transparent,
                         builder: (BuildContext context) {
-                          return  ExerciseDescription(
+                          return ExerciseDescription(
                             key: _scaffoldKey,
                             title: 'Curl',
-                            image: 
-                  'https://muscleseek.com/wp-content/uploads/2013/12/big-bicep.jpg',
-                            description: 'very very very loooong description of the excercise',
-                          );
-                        },
-                      );
-                    },
-                  ),GestureDetector(
-                    child: ListTile(
-                        leading:  Container(
-                child: Image.network(
-                  'https://muscleseek.com/wp-content/uploads/2013/12/big-bicep.jpg',
-                  fit: BoxFit.contain,
-                ),
-              ),
-                      title: Text(
-                        'Curl',
-                        style: Theme.of(context)
-                            .textTheme
-                            .headline5
-                            .copyWith(fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.left,
-                      ),
-                      subtitle: Text('3 series x 12 reps'),
-                    ),
-                    onTap: () {
-                      showModalBottomSheet(
-                        context: context,
-                        elevation: 30000,
-                        backgroundColor: Colors.transparent,
-                        builder: (BuildContext context) {
-                          return  ExerciseDescription(
-                            key: _scaffoldKey,
-                            title: 'Curl',
-                            image: 
-                  'https://muscleseek.com/wp-content/uploads/2013/12/big-bicep.jpg',
-                            description: 'very very very loooong description of the excercise',
+                            image:
+                                'https://muscleseek.com/wp-content/uploads/2013/12/big-bicep.jpg',
+                            description:
+                                'very very very loooong description of the excercise',
                           );
                         },
                       );
                     },
                   ),
-               ],
+                  GestureDetector(
+                    child: ListTile(
+                      leading: Container(
+                        child: Image.network(
+                          'https://muscleseek.com/wp-content/uploads/2013/12/big-bicep.jpg',
+                          fit: BoxFit.contain,
+                        ),
+                      ),
+                      title: Text(
+                        'Curl',
+                        style: Theme.of(context)
+                            .textTheme
+                            .headline5
+                            .copyWith(fontWeight: FontWeight.bold),
+                        textAlign: TextAlign.left,
+                      ),
+                      subtitle: Text('3 series x 12 reps'),
+                    ),
+                    onTap: () {
+                      showModalBottomSheet(
+                        context: context,
+                        elevation: 30000,
+                        backgroundColor: Colors.transparent,
+                        builder: (BuildContext context) {
+                          return ExerciseDescription(
+                            key: _scaffoldKey,
+                            title: 'Curl',
+                            image:
+                                'https://muscleseek.com/wp-content/uploads/2013/12/big-bicep.jpg',
+                            description:
+                                'very very very loooong description of the excercise',
+                          );
+                        },
+                      );
+                    },
+                  ),
+                ],
               ),
             )
           ]),

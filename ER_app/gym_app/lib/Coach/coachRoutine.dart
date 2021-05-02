@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gym_app/Coach/bloc/coach_bloc.dart';
 import 'package:gym_app/widgets/Routine_element.dart';
 import 'package:gym_app/Coach/coachProfile.dart';
 import 'package:gym_app/widgets/New_Excersise.dart';
@@ -7,7 +8,10 @@ import '../profile.dart';
 
 class CoachRoutine extends StatefulWidget {
   final String title;
-  CoachRoutine({Key key, this.title}) : super(key: key);
+  CoachRoutine({
+    Key key,
+    this.title,
+  }) : super(key: key);
 
   @override
   _CoachRoutineState createState() => _CoachRoutineState();
@@ -19,15 +23,6 @@ class _CoachRoutineState extends State<CoachRoutine> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
-      appBar: AppBar(
-        title: Text('Rutina del día'),
-        actions: <Widget>[
-          IconButton(icon: Icon(Icons.search_rounded), onPressed: () {}),
-          IconButton(icon: Icon(Icons.more_vert_rounded), onPressed: () {})
-        ],
-      ),
-      drawer: CoachProfile(),
       body: ListView(
         children: <Widget>[
           GestureDetector(
@@ -55,9 +50,10 @@ class _CoachRoutineState extends State<CoachRoutine> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
+            isScrollControlled: true,
             elevation: 30000,
             backgroundColor: Colors.transparent,
-            builder: (BuildContext context) {
+            builder: (context) {
               return NewExcersise();
             },
           );

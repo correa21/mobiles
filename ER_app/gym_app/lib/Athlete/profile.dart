@@ -70,7 +70,7 @@ class Profile extends StatelessWidget {
                       child: RaisedButton(
                         child: Text(PROFILE_LOGOUT),
                         onPressed: () {
-                            Navigator.of(context).popAndPushNamed('/');
+                          Navigator.of(context).popAndPushNamed('/');
                         },
                       ),
                     ),

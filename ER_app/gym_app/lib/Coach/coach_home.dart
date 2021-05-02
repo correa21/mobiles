@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gym_app/Coach/bloc/coach_bloc.dart';
+import 'package:gym_app/Coach/coachRoutine.dart';
+import 'package:gym_app/Coach/coach_athletes.dart';
 import 'package:gym_app/widgets/Routine_element.dart';
 import 'package:gym_app/Coach/coachProfile.dart';
 import 'package:gym_app/widgets/New_Excersise.dart';
 import 'package:gym_app/widgets/coach_exercise.dart';
+import '../constants.dart';
 import '../profile.dart';
 
 class CoachHome extends StatefulWidget {
@@ -15,59 +20,36 @@ class CoachHome extends StatefulWidget {
 
 class _CoachHomeState extends State<CoachHome> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
+  CoachBloc coachBloc;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      key: _scaffoldKey,
       appBar: AppBar(
-        title: Text('Rutina del día'),
+        title: Text('Bienvenido TU!'),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.search_rounded), onPressed: () {}),
           IconButton(icon: Icon(Icons.more_vert_rounded), onPressed: () {})
         ],
       ),
-      drawer: CoachProfile(),
-      body: ListView(
-        children: <Widget>[
-          GestureDetector(
-            child: RoutineElement(
-              title: 'Curl',
-              image:
-                  'https://muscleseek.com/wp-content/uploads/2013/12/big-bicep.jpg',
-            ),
-          ),
-          GestureDetector(
-            child: RoutineElement(
-              title: 'Curl',
-              image: "https://dkpp.go.id/wp-content/uploads/2018/10/photo.jpg",
-            ),
-          ),
-          GestureDetector(
-            child: RoutineElement(
-              title: 'Curl',
-              image: "https://dkpp.go.id/wp-content/uploads/2018/10/photo.jpg",
-            ),
-          )
-        ],
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          showModalBottomSheet(
-            context: context,
-            elevation: 30000,
-            backgroundColor: Colors.transparent,
-            builder: (BuildContext context) {
-              return NewExcersise();
+      drawer: CoachProfile(bloc: coachBloc),
+      body: BlocProvider(
+          create: (context) {
+            coachBloc = CoachBloc();
+            return coachBloc;
+          },
+          child: BlocConsumer<CoachBloc, CoachState>(
+            listener: (context, state) {},
+            builder: (context, state) {
+              if (state is NewRoutineState) {
+                return CoachRoutine();
+              } else if (state is AthleteProfile) {
+                //TODO: show single athlete information card
+              } else {
+                return CoachAthletes();
+              }
             },
-          );
-        },
-        child: const Icon(
-          Icons.add,
-          size: 39,
-        ),
-        backgroundColor: Colors.indigo,
-      ),
+          )),
     );
   }
 }
