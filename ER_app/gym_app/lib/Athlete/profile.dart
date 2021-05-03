@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'constants.dart';
-import 'widgets/Counter.dart';
+import '../constants.dart';
+import '../widgets/Counter.dart';
 
 class Profile extends StatelessWidget {
   const Profile({

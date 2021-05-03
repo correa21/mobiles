@@ -5,14 +5,16 @@ import 'package:gym_app/Coach/coachRoutine.dart';
 import 'package:gym_app/Coach/coach_athletes.dart';
 import 'package:gym_app/widgets/Routine_element.dart';
 import 'package:gym_app/Coach/coachProfile.dart';
+import 'package:gym_app/models/coach.dart';
 import 'package:gym_app/widgets/New_Excersise.dart';
 import 'package:gym_app/widgets/coach_exercise.dart';
 import '../constants.dart';
-import '../profile.dart';
+import '../Athlete/profile.dart';
 
 class CoachHome extends StatefulWidget {
   final String title;
-  CoachHome({Key key, this.title}) : super(key: key);
+  Coach coach;
+  CoachHome({Key key, this.title, @required this.coach}) : super(key: key);
 
   @override
   _CoachHomeState createState() => _CoachHomeState();
@@ -26,7 +28,7 @@ class _CoachHomeState extends State<CoachHome> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Bienvenido TU!'),
+        title: Text('Bienvenido ${widget.coach.nombre}!'),
         actions: <Widget>[
           IconButton(icon: Icon(Icons.search_rounded), onPressed: () {}),
           IconButton(icon: Icon(Icons.more_vert_rounded), onPressed: () {})
@@ -36,6 +38,7 @@ class _CoachHomeState extends State<CoachHome> {
       body: BlocProvider(
           create: (context) {
             coachBloc = CoachBloc();
+            coachBloc.add(ShowAthleteListEvent());
             return coachBloc;
           },
           child: BlocConsumer<CoachBloc, CoachState>(
@@ -45,8 +48,10 @@ class _CoachHomeState extends State<CoachHome> {
                 return CoachRoutine();
               } else if (state is AthleteProfile) {
                 //TODO: show single athlete information card
-              } else {
-                return CoachAthletes();
+              } else if (state is ShowAthletsState) {
+                return CoachAthletes(
+                  listaAtletas: widget.coach.atletas,
+                );
               }
             },
           )),

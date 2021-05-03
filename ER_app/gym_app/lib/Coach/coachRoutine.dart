@@ -4,7 +4,7 @@ import 'package:gym_app/widgets/Routine_element.dart';
 import 'package:gym_app/Coach/coachProfile.dart';
 import 'package:gym_app/widgets/New_Excersise.dart';
 import 'package:gym_app/widgets/coach_exercise.dart';
-import '../profile.dart';
+import '../Athlete/profile.dart';
 
 class CoachRoutine extends StatefulWidget {
   final String title;

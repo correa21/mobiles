@@ -1,18 +1,21 @@
-import 'package:equatable/equatable.dart';
+import 'dart:ui';
+
+import 'package:flutter/foundation.dart';
 
 import 'atletas.dart';
 import 'deporte.dart';
 
-class Coach extends Equatable {
-  final int? id;
-  final String? idEntrenador;
-  final String? apellido;
-  final String? nombre;
-  final Deporte? deporte;
-  final String? publishedAt;
-  final String? createdAt;
-  final String? updatedAt;
-  final List<Atletas>? atletas;
+@immutable
+class Coach {
+  final int id;
+  final String idEntrenador;
+  final String apellido;
+  final String nombre;
+  final Deporte deporte;
+  final String publishedAt;
+  final String createdAt;
+  final String updatedAt;
+  final List<Atletas> atletas;
 
   const Coach({
     this.id,
@@ -26,21 +29,27 @@ class Coach extends Equatable {
     this.atletas,
   });
 
+  @override
+  String toString() {
+    return 'Coach(id: $id, idEntrenador: $idEntrenador, apellido: $apellido, nombre: $nombre, deporte: $deporte, publishedAt: $publishedAt, createdAt: $createdAt, updatedAt: $updatedAt, atletas: $atletas)';
+  }
+
   factory Coach.fromJson(Map<String, dynamic> json) {
     return Coach(
-      id: json['id'] as int?,
-      idEntrenador: json['ID_entrenador'] as String?,
-      apellido: json['apellido'] as String?,
-      nombre: json['Nombre'] as String?,
+      id: json['id'] as int,
+      idEntrenador: json['ID_entrenador'] as String,
+      apellido: json['apellido'] as String,
+      nombre: json['Nombre'] as String,
       deporte: json['deporte'] == null
           ? null
           : Deporte.fromJson(json['deporte'] as Map<String, dynamic>),
-      publishedAt: json['published_at'] as String?,
-      createdAt: json['created_at'] as String?,
-      updatedAt: json['updated_at'] as String?,
-      atletas: (json['atletas'] as List<dynamic>?)
-          ?.map((e) => Atletas.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      publishedAt: json['published_at'] as String,
+      createdAt: json['created_at'] as String,
+      updatedAt: json['updated_at'] as String,
+      atletas: (json['atletas'] as List<dynamic>)
+          ?.map((e) =>
+              e == null ? null : Atletas.fromJson(e as Map<String, dynamic>))
+          ?.toList(),
     );
   }
 
@@ -54,20 +63,20 @@ class Coach extends Equatable {
       'published_at': publishedAt,
       'created_at': createdAt,
       'updated_at': updatedAt,
-      'atletas': atletas?.map((e) => e.toJson()).toList(),
+      'atletas': atletas?.map((e) => e?.toJson())?.toList(),
     };
   }
 
   Coach copyWith({
-    int? id,
-    String? idEntrenador,
-    String? apellido,
-    String? nombre,
-    Deporte? deporte,
-    String? publishedAt,
-    String? createdAt,
-    String? updatedAt,
-    List<Atletas>? atletas,
+    int id,
+    String idEntrenador,
+    String apellido,
+    String nombre,
+    Deporte deporte,
+    String publishedAt,
+    String createdAt,
+    String updatedAt,
+    List<Atletas> atletas,
   }) {
     return Coach(
       id: id ?? this.id,
@@ -83,11 +92,23 @@ class Coach extends Equatable {
   }
 
   @override
-  bool get stringify => true;
+  bool operator ==(Object other) {
+    if (identical(other, this)) return true;
+    return other is Coach &&
+        other.id == id &&
+        other.idEntrenador == idEntrenador &&
+        other.apellido == apellido &&
+        other.nombre == nombre &&
+        other.deporte == deporte &&
+        other.publishedAt == publishedAt &&
+        other.createdAt == createdAt &&
+        other.updatedAt == updatedAt &&
+        listEquals(other.atletas, atletas);
+  }
 
   @override
-  List<Object?> get props {
-    return [
+  int get hashCode {
+    return hashValues(
       id,
       idEntrenador,
       apellido,
@@ -97,6 +118,6 @@ class Coach extends Equatable {
       createdAt,
       updatedAt,
       atletas,
-    ];
+    );
   }
 }

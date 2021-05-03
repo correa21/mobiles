@@ -61,19 +61,19 @@ class _RegisterState extends State<Register> {
                   ),
                   obscureText: true,
                 ),
-                ListTile(
-                  leading: Checkbox(
-                      value: _termsController,
-                      onChanged: (bool newValue) {
-                        setState(() {
-                          _termsController = newValue;
-                        });
-                      }),
-                  title: Text(
-                    'ACEPTO LOS TÉRMINOS Y CONDICIONES DE USO',
-                    textScaleFactor: 0.75,
-                  ),
-                ),
+                //ListTile(
+                //   leading: Checkbox(
+                //       value: _termsController,
+                //       // onChanged: (bool newValue) {
+                //       //   setState(() {
+                //       //     _termsController = newValue;
+                //       //   });
+                //       }),
+                //   title: Text(
+                //     'ACEPTO LOS TÉRMINOS Y CONDICIONES DE USO',
+                //     textScaleFactor: 0.75,
+                //   ),
+                // ),
                 RaisedButton(
                   child: Text('REGISTRATE'),
                   onPressed: () {

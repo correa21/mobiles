@@ -16,13 +16,9 @@ For help getting started with Flutter, view our
 samples, guidance on mobile development, and a full API reference.
 
 TODO:
-- implement block builder of authentication in main file and a splash screen
+- implement block builder of authentication in main file and a splash screen to get all values
 
 - authentication bloc as singleton
-
-- Change drawer to bottom navigation bar
-
-- Consume api 
 
 - At athlete routine page add a startup bloc event to get the newest routine and implement bloc consumer as child of bloc provider and use a refresh indicator
 
